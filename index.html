@@ -169,7 +169,7 @@
       if(!arr.length) return ''; const headers = ['Música','Versão','Pontuação','Estrelas'];
       const esc = v => '"'+String(v||'').replace(/"/g,'""')+'"';
       const lines = [headers.map(esc).join(',')];
-      arr.forEach(r=> lines.push([r.musica,r.versao,r.pontuacao,r.estrelas,r.jogo].map(esc).join(',')));
+      arr.forEach(r=> lines.push([r.musica,r.versao,r.pontuacao,r.estrelas].map(esc).join(',')));
       return lines.join('\n');
     }
     exportCsvBtn.addEventListener('click', ()=>{
@@ -185,7 +185,7 @@
       reader.onload = ev => {
         try{ const parsed = JSON.parse(ev.target.result); if(!Array.isArray(parsed)) throw new Error('Formato inválido');
           // normalize
-          parsed.forEach(it=>{ it.musica = it.musica||it.Música||it.song||''; it.versao = it.versao||it.Versão||it.version||''; it.pontuacao = it.pontuacao||it.Pontuação||it.score||''; it.estrelas = it.estrelas||it.Estrelas||''; it.jogo = it.jogo||it.Jogo||it.game||''; });
+          parsed.forEach(it=>{ it.musica = it.musica||it.Música||it.song||''; it.versao = it.versao||it.Versão||it.version||''; it.pontuacao = it.pontuacao||it.Pontuação||it.score||''; it.estrelas = it.estrelas||it.Estrelas||''; });
           dados = parsed.filter(x=>x.musica && x.musica.trim()!==''); save(); render();
         }catch(err){ alert('Erro ao importar JSON: '+err.message); }
       };
