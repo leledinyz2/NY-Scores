@@ -225,7 +225,7 @@
     <button id="loadSheet">Carregar</button>
   </div>
   <script>
-// ----- IMPORTAR VIA PLANILHA (agora usando "dados" corretamente) -----
+// ----- IMPORTAR VIA PLANILHA (CSV) -----
 
 async function loadFromURL(url){
   try{
@@ -234,24 +234,36 @@ async function loadFromURL(url){
 
     console.log("CSV recebido:", text);
 
-    const rows = text.split(/\r?\n/).map(r => r.split(","));
+    const rows = text
+      .split(/\r?\n/)
+      .map(r => r.split(","))
+      .filter(r => r.some(x => x.trim() !== ""));
+
+    if(rows.length <= 1){
+      alert("Planilha vazia ou inválida.");
+      return;
+    }
+
+    // Remove cabeçalho
+    rows.shift();
 
     rows.forEach(r=>{
-      if(r.length >= 1 && r[0].trim() !== ""){
-        const item = {
-          musica: r[0].trim(),
-          versao: r[1] ? r[1].trim() : "",
-          pontuacao: "",
-          estrelas: "",
-          jogo: ""
-        };
+      const item = {
+        musica: r[0] ? r[0].trim() : "",
+        versao: r[1] ? r[1].trim() : "",
+        pontuacao: r[2] ? Number(r[2].trim()) : "",
+        estrelas: r[3] ? r[3].trim() : "",
+        jogo: r[4] ? r[4].trim() : ""
+      };
+
+      if(item.musica !== ""){
         dados.push(item);
       }
     });
 
     save();
     render();
-    alert("Planilha carregada!");
+    alert("Planilha carregada com sucesso!");
     
   }catch(err){
     alert("Erro ao carregar: " + err.message);
