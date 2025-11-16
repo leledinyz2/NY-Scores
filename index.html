@@ -281,6 +281,36 @@ tr:hover {
       </table>
     </div>
   </div>
+  <script>
+const codigosValidos = [
+    "MEUCODIGO1",
+    "JDVIP2025",
+    "ACESSOPRO",
+    "CODIGOEXEMPLO"
+];
+
+function validarCodigo() {
+    const codigo = document.getElementById("codigoInput").value.trim();
+    const erro = document.getElementById("erro");
+
+    if (codigosValidos.includes(codigo)) {
+        // salva no navegador do usuário
+        localStorage.setItem("acessoLiberado", "sim");
+
+        // remove a tela
+        document.getElementById("acesso-container").style.display = "none";
+    } else {
+        erro.innerText = "Código inválido!";
+    }
+}
+
+// se o usuário já usou um código antes, não precisa digitar de novo
+window.onload = () => {
+    if (localStorage.getItem("acessoLiberado") === "sim") {
+        document.getElementById("acesso-container").style.display = "none";
+    }
+};
+</script>
 
   <script>
     // storage key
