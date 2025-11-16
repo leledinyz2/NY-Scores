@@ -369,10 +369,10 @@ window.onload = () => {
       const musica = inputMusica.value.trim();
       if(!musica) return alert('Coloca o nome da música!');
       const item = {
-  musica: musicaInput.value,
-  versao: versaoInput.value,
-  pontuacao: Number(pontuacaoInput.value),
-  estrelas: estrelasInput.value
+  musica: inputMusica.value,
+  versao: inputVersao.value,
+  pontuacao: Number(inputPontuacao.value),
+  estrelas: inputEstrelas.value
 };
       dados.push(item); save(); render(); form.reset(); inputMusica.focus();
     });
