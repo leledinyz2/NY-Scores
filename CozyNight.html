@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cozy Night Mode</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: radial-gradient(#2a1640, #12071d);
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+      color: #e6d9ff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    h1 {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      opacity: 0.8;
+      font-size: 16px;
+      margin-bottom: 30px;
+    }
+
+    /* Estrelas */
+    .star {
+      position: absolute;
+      background: white;
+      width: 2px;
+      height: 2px;
+      border-radius: 50%;
+      opacity: 0.8;
+      animation: twinkle 2s infinite ease-in-out;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.2; }
+      50% { opacity: 1; }
+    }
+
+    .btn {
+      padding: 12px 20px;
+      border-radius: 10px;
+      background: #7a3cff;
+      border: none;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .btn:hover {
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Cozy Night</h1>
+  <p>Um clima roxinho, calmo e com estrelas piscando.</p>
+  <button class="btn">Relaxar</button>
+
+  <script>
+    function createStar() {
+      const star = document.createElement('div');
+      star.classList.add('star');
+      star.style.top = Math.random() * 100 + 'vh';
+      star.style.left = Math.random() * 100 + 'vw';
+      star.style.animationDuration = (1 + Math.random() * 2) + 's';
+      document.body.appendChild(star);
+    }
+
+    for (let i = 0; i < 120; i++) {
+      createStar();
+    }
+  </script>
+
+</body>
+</html>
