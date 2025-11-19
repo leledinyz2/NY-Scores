@@ -1,96 +1,126 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Portfolio - Leleny</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #1a0f25;
-      color: #fff;
-    }
-    header {
-      padding: 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    header h1 {
-      margin: 0;
-      font-size: 24px;
-    }
-    nav a {
-      color: #c7a6ff;
-      margin-left: 15px;
-      text-decoration: none;
-      font-size: 16px;
-    }
-    .container {
-      padding: 40px 20px;
-      max-width: 900px;
-      margin: auto;
-    }
-    h2 {
-      margin-top: 0;
-      color: #d7b9ff;
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-      margin-top: 30px;
-    }
-    .card {
-      background: #2a1838;
-      padding: 15px;
-      border-radius: 12px;
-      text-decoration: none;
-      color: #fff;
-      transition: transform 0.2s ease;
-    }
-    .card:hover {
-      transform: scale(1.03);
-    }
-    .card img {
-      width: 100%;
-      border-radius: 10px;
-      margin-bottom: 10px;
-    }
-    .card h3 {
-      margin: 0;
-      font-size: 18px;
-      color: #e5d4ff;
-    }
-  </style>
-</head>
-<body>
-  <header>
-    <h1>Leleny</h1>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="https://www.youtube.com/@moon.leleny">Canal</a>
-      <a href="sobre.html">Sobre</a>
-    </nav>
-  </header>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vídeos • Lele</title>
 
-  <div class="container">
-    <h2>Vídeos recentes</h2>
-    <div class="grid">
-      <a class="card" href="#">
-        <img src="https://i.ytimg.com/vi/VIDEO_ID_1/maxresdefault.jpg" alt="Thumbnail" />
-        <h3>Título do Vídeo 1</h3>
-      </a>
-      <a class="card" href="#">
-        <img src="https://i.ytimg.com/vi/VIDEO_ID_2/maxresdefault.jpg" alt="Thumbnail" />
-        <h3>Título do Vídeo 2</h3>
-      </a>
-      <a class="card" href="#">
-        <img src="https://i.ytimg.com/vi/VIDEO_ID_3/maxresdefault.jpg" alt="Thumbnail" />
-        <h3>Título do Vídeo 3</h3>
-      </a>
-    </div>
-  </div>
+    <style>
+        :root {
+            --bg: #1a0f2e;
+            --roxo1: #b090ff;
+            --roxo2: #9f7bff;
+            --texto: #e7e0f5;
+            --card: #ffffff12;
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--texto);
+            font-family: "Inter", Arial, sans-serif;
+        }
+
+        nav {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+        }
+
+        nav a {
+            color: var(--texto);
+            text-decoration: none;
+            margin-left: 20px;
+            opacity: .85;
+        }
+        nav a:hover {
+            opacity: 1;
+        }
+
+        .section-title {
+            max-width: 1000px;
+            margin: 50px auto 20px;
+            padding: 0 25px;
+            font-size: 1.7rem;
+            font-weight: 700;
+            opacity: .9;
+        }
+
+        .videos {
+            max-width: 1000px;
+            margin: 0 auto 80px;
+            padding: 0 25px;
+            display: grid;
+            gap: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+        }
+
+        .card {
+            background: var(--card);
+            border-radius: 20px;
+            padding: 25px;
+            backdrop-filter: blur(6px);
+        }
+
+        .card h3 {
+            margin-top: 0;
+            font-size: 1.3rem;
+        }
+
+        .card p {
+            margin: 10px 0 15px;
+            font-size: 1rem;
+            opacity: .85;
+        }
+
+        .card a {
+            color: var(--roxo1);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .card a:hover {
+            opacity: .7;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div style="font-size: 1.3rem;">Lele</div>
+        <div>
+            <a href="index.html">Home</a>
+            <a href="sobre.html">Sobre</a>
+            <a href="videos.html">Vídeos</a>
+            <a href="https://www.youtube.com/@moon.leleny" target="_blank">Canal</a>
+        </div>
+    </nav>
+
+    <div class="section-title">Vídeos Recentes</div>
+
+    <section class="videos">
+        <div class="card">
+            <h3>Vídeo 1</h3>
+            <p>Descrição rápida.</p>
+            <a href="LINK_DO_VIDEO" target="_blank">Assistir</a>
+        </div>
+
+        <div class="card">
+            <h3>Vídeo 2</h3>
+            <p>Outro vídeo novo.</p>
+            <a href="LINK_DO_VIDEO" target="_blank">Assistir</a>
+        </div>
+
+        <div class="card">
+            <h3>Vídeo 3</h3>
+            <p>Mais um lançamento.</p>
+            <a href="LINK_DO_VIDEO" target="_blank">Assistir</a>
+        </div>
+    </section>
+
 </body>
 </html>
