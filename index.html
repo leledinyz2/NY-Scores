@@ -669,8 +669,8 @@
                 ratingDisplay.textContent = 'Selecione um nível';
                 ratingDisplay.style.color = '#888';
             } else {
-                const ratingText = selectedRating === 'superstar' ? '⭐ Superstar' : 
-                                  selectedRating === 'megastar' ? '⭐ Megastar' : 
+                const ratingText = selectedRating === 'superstar' ? '🩵🩵🩵🩵🩵' : 
+                                  selectedRating === 'megastar' ? '🩷🩷🩷🩷🩷' : 
                                   '⭐'.repeat(selectedRating);
                 ratingDisplay.textContent = ratingText;
                 ratingDisplay.style.color = '#b8ff00';
@@ -747,8 +747,8 @@
                 (ratingOrder[s.rating] || 0) > (ratingOrder[max.rating] || 0) ? s : max
             );
 
-            const ratingText = bestRatingObj.rating === 'superstar' ? '⭐ Superstar' : 
-                              bestRatingObj.rating === 'megastar' ? '⭐ Megastar' : 
+            const ratingText = bestRatingObj.rating === 'superstar' ? '🩵🩵🩵🩵🩵' : 
+                              bestRatingObj.rating === 'megastar' ? '🩷🩷🩷🩷🩷' : 
                               '⭐'.repeat(bestRatingObj.rating);
             document.getElementById('bestRating').textContent = ratingText;
         }
@@ -784,8 +784,8 @@
             }
 
             tbody.innerHTML = filtered.map(s => {
-                const ratingDisplay = s.rating === 'superstar' ? '<span class="superstar-badge">⭐ Superstar</span>' :
-                                     s.rating === 'megastar' ? '<span class="megastar-badge">⭐ Megastar</span>' :
+                const ratingDisplay = s.rating === 'superstar' ? '<span class="superstar-badge">🩵🩵🩵🩵🩵</span>' :
+                                     s.rating === 'megastar' ? '<span class="megastar-badge">🩷🩷🩷🩷🩷</span>' :
                                      `<span class="stars">${'⭐'.repeat(s.rating)}</span>`;
 
                 return `
