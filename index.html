@@ -264,37 +264,46 @@ header.main-header {
   border: 1px solid rgba(255, 255, 255, 0.08) !important;
   box-shadow: none !important;
 }
-  /* container */
-.star-rating {
-    display: flex;
-    gap: 8px;
-    user-select: none;
-    cursor: pointer;
-    font-size: 28px;
-}
 
-/* estado padrão */
+  /* ⭐ Estrelas padrão (normais) */
 .star-rating span {
     color: #ffd84d;
     opacity: 0.35;
-    transition: 0.15s ease;
+    transition: 0.15s;
 }
 
-/* estrelas ativadas */
-.star-rating span.active {
+/* Quando uma estrela normal está ativa */
+.star-rating span.active:not(.superstar):not(.megastar) {
     opacity: 1;
+    filter: drop-shadow(0 0 4px #ffe46b);
 }
 
-/* modo superstar – tudo azul */
+/* ⭐ Superstar individual (caso só clique nela) */
+.star-rating .superstar.active {
+    color: #4aa3ff;
+    opacity: 1;
+    filter: drop-shadow(0 0 6px #4aa3ff);
+}
+
+/* ⭐ Megastar individual */
+.star-rating .megastar.active {
+    color: #ff4ad8;
+    opacity: 1;
+    filter: drop-shadow(0 0 6px #ff4ad8);
+}
+
+/* ⭐ MODO SUPERSTAR — todas as estrelas ficam azuis */
 .star-rating.superstar-mode span {
     color: #4aa3ff !important;
     opacity: 1 !important;
+    filter: drop-shadow(0 0 6px #4aa3ff) !important;
 }
 
-/* modo megastar – tudo rosa */
+/* ⭐ MODO MEGASTAR — todas as estrelas ficam rosas */
 .star-rating.megastar-mode span {
     color: #ff4ad8 !important;
     opacity: 1 !important;
+    filter: drop-shadow(0 0 6px #ff4ad8) !important;
 }
 </style>
 </head>
@@ -832,6 +841,40 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 });
+</script>
+  <script>
+    document.querySelectorAll(".star-rating").forEach(starBlock => {
+    const stars = starBlock.querySelectorAll("span");
+
+    stars.forEach(star => {
+        star.addEventListener("click", () => {
+            const value = Number(star.dataset.value);
+
+            // Remove modos especiais antes de aplicar outro
+            starBlock.classList.remove("superstar-mode", "megastar-mode");
+
+            // Limpa todas as estrelas
+            stars.forEach(s => s.classList.remove("active"));
+
+            // Modo normal: 1–5
+            if (value <= 5) {
+                stars.forEach(s => {
+                    if (Number(s.dataset.value) <= value) {
+                        s.classList.add("active");
+                    }
+                });
+                return; // garante que não aplique superstar/megastar
+            }
+
+            // Modo superstar (6)
+            if (value === 6) {
+                starBlock.classList.add("superstar-mode");
+                return;
+            }
+
+            // Modo megastar (7)
+            if (value === 7) {
+                starBlock.classList.add("megastar-mode");
 </script>
 </body>
 </html>
