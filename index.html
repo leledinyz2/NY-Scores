@@ -294,6 +294,43 @@ header.main-header {
   opacity: 1;
   filter: drop-shadow(0 0 3px #ffe46b);
 }
+
+.star-rating {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  cursor: pointer;
+  user-select: none;
+}
+
+.star-rating span {
+  font-size: 26px;
+  opacity: 0.35;
+  transition: 0.15s;
+}
+
+.star-rating span.active {
+  opacity: 1;
+  filter: drop-shadow(0 0 4px #ffe46b);
+}
+
+/* Superstar azul */
+.star-rating .superstar {
+  color: #4aa3ff;
+}
+.star-rating .superstar.active {
+  filter: drop-shadow(0 0 6px #4aa3ff);
+  opacity: 1;
+}
+
+/* Megastar rosa/magenta */
+.star-rating .megastar {
+  color: #ff4ad8;
+}
+.star-rating .megastar.active {
+  filter: drop-shadow(0 0 6px #ff4adf);
+  opacity: 1;
+}
 </style>
 </head>
 <body>
@@ -392,6 +429,8 @@ header.main-header {
   <span data-value="3">⭐</span>
   <span data-value="4">⭐</span>
   <span data-value="5">⭐</span>
+  <span class="superstar" data-value="6">⭐⭐⭐⭐⭐</span>
+  <span class="megastar" data-value="7">⭐⭐⭐⭐⭐</span>
          </div>
         </div>
 
@@ -577,6 +616,29 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // retorna sempre o valor atual
+  return () => valor;
+}
+
+let pegarEstrelas = configurarEstrelas();
+
+function configurarEstrelas() {
+  const container = document.querySelector("#addEstrelas");
+  let valor = 1;
+
+  function atualizar() {
+    container.querySelectorAll("span").forEach(star => {
+      const v = Number(star.dataset.value);
+      star.classList.toggle("active", v === valor);
+    });
+  }
+
+  container.querySelectorAll("span").forEach(star => {
+    star.addEventListener("click", () => {
+      valor = Number(star.dataset.value);
+      atualizar();
+    });
+  });
+
   return () => valor;
 }
 
