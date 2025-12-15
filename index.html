@@ -331,6 +331,44 @@ header.main-header {
       </aside>
     </section>
 
+    <div class="score-panel" style="
+    position: relative;
+    margin-bottom: 25px;
+    padding: 20px;
+    background: var(--panel-bg);
+    border-radius: 12px;
+    box-shadow: 0 0 12px rgba(0,0,0,0.25);
+">
+
+    <h2 style="color: var(--accent-purple); margin-bottom: 15px;">Pontuações</h2>
+
+    <div class="controls">
+
+        <div class="control">
+            <label>Pontuação</label>
+            <input id="addPontuacao" type="text" placeholder="Ex: 12845">
+        </div>
+
+        <div class="control">
+            <label>Estrelas</label>
+            <select id="addEstrelas">
+                <option value="1">1 ⭐</option>
+                <option value="2">2 ⭐</option>
+                <option value="3">3 ⭐</option>
+                <option value="4">4 ⭐</option>
+                <option value="5">5 ⭐</option>
+            </select>
+        </div>
+
+        <button id="btnAddScore" class="pill" 
+            style="margin-left:10px;height:42px;background:var(--accent-purple);color:#181818">
+            Salvar
+        </button>
+
+    </div>
+
+</div>
+
     <!-- Main panel: filtros + tabela -->
     <main class="main-panel" role="main" aria-labelledby="tabela-title">
       <h2 id="tabela-title" style="margin:0 0 12px 0;color:var(--muted);font-size:1.05rem">Placar</h2>
