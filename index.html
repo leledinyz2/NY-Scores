@@ -654,7 +654,9 @@ let pegarEstrelas = configurarEstrelas();
             star.addEventListener("click", () => {
                 const value = parseInt(star.getAttribute("data-value"));
 
-                estrelas.forEach(s => s.classList.remove("active"));
+                estrelas.forEach(s => {
+  s.classList.remove("active");
+});
 
                 for (let i = 0; i < value; i++) {
                     estrelas[i].classList.add("active");
@@ -783,7 +785,9 @@ function configurarEstrelas() {
             const value = parseInt(star.getAttribute("data-value"));
 
             // remove ativo de todas
-            estrelas.forEach(s => s.classList.remove("active"));
+           estrelas.forEach(s => {
+  s.classList.remove("active");
+});
 
             // ativa todas até a clicada
             for (let i = 0; i < estrelas.length; i++) {
