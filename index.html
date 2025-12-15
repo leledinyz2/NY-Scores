@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="pt-BR">
 <head>
@@ -532,6 +531,72 @@ document.addEventListener("DOMContentLoaded", () => {
     atualizarStats();
 });
 ;
+  
+// 🎨 Temas disponíveis — cada um com cor principal e fundo escuro próprio
+const temas = {
+  verde: {
+    cor: "#BFFF3B",
+    fundo1: "#381929",
+    fundo2: "#2C1120",
+    fundo3: "#1A0A12"
+  },
+  roxo: {
+  cor: "#C39BFF",         // roxo pastel
+  fundo1: "#183033",      // verde-azulado escuro
+  fundo2: "#122326",
+  fundo3: "#0C1719"
+},
+  azul: {
+  cor: "#47B8FF",         // azul ciano
+  fundo1: "#361D14",      // laranja queimado
+  fundo2: "#2A150E",
+  fundo3: "#1A0D09"
+},
+  vermelho: {
+  cor: "#FF6F91",         // rosa avermelhado
+  fundo1: "#0E193B",      // azul escuro
+  fundo2: "#0A132A",
+  fundo3: "#050A1A"
+},
+  amarelo: {
+    cor: "#F2D546",
+    fundo1: "#2F103B",
+    fundo2: "#1E0A26",
+    fundo3: "#100514"
+  },
+    azulFuturista: {
+    cor: "#E5C029",
+    fundo1: "#271639",
+    fundo2: "#71221F",
+    fundo3: "#5E1F71"
+  },
+  code: {
+    cor: "#3BFF38",
+    fundo1: "#131313",
+    fundo2: "#030303",
+    fundo3: "#011301"
+  }
+};
+
+function aplicarTema(nome) {
+  const tema = temas[nome] || temas.verde;
+  document.documentElement.style.setProperty("--accent-lime", tema.cor);
+  document.documentElement.style.setProperty("--bg-deep", tema.fundo1);
+  document.documentElement.style.setProperty("--bg-mid", tema.fundo2);
+  document.documentElement.style.setProperty("--bg-low", tema.fundo3);
+
+  document.body.style.background = `var(--bg-deep)`;
+
+  const select = document.getElementById("themeSelect");
+  select.style.color = tema.cor;
+  select.style.borderColor = tema.cor;
+}
+
+document.getElementById("themeSelect").addEventListener("change", (e) => {
+  aplicarTema(e.target.value);
+});
+
+aplicarTema("verde");
 </script>
   <script>
 document.querySelector("#btnAddScore").onclick = () => {
