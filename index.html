@@ -175,6 +175,14 @@
   }
   input[type="text"]:focus, select:focus{box-shadow:0 0 12px var(--accent-lime)}
 
+    input[type="number"] {
+    width:100%;padding:10px 12px;border-radius:12px;border:1px solid rgba(255,255,255,0.04);
+    background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.12));
+    color:var(--text);outline:none;font-size:0.95rem;
+    box-shadow: inset -6px -6px 12px rgba(255,255,255,0.02), 8px 10px 22px rgba(0,0,0,0.45);
+    backdrop-filter: blur(6px);
+  }
+
   /* table style as card rows (neumorphic) */
   table {
     width:100%;
