@@ -594,7 +594,6 @@ document.addEventListener("DOMContentLoaded", () => {
     criarFormulario();
     atualizarTabela();
     atualizarStats();
-   configurarEstrelas();
 });
 ;
 
@@ -644,6 +643,30 @@ function configurarEstrelas() {
 }
 
 let pegarEstrelas = configurarEstrelas();
+
+  function configurarEstrelas() {
+    const ratings = document.querySelectorAll(".rating");
+
+    ratings.forEach(container => {
+        const estrelas = container.querySelectorAll("span");
+
+        estrelas.forEach(star => {
+            star.addEventListener("click", () => {
+                const value = parseInt(star.getAttribute("data-value"));
+
+                estrelas.forEach(s => s.classList.remove("active"));
+
+                for (let i = 0; i < value; i++) {
+                    estrelas[i].classList.add("active");
+                }
+
+                container.setAttribute("data-rating", value);
+            });
+        });
+    });
+}
+
+configurarEstrelas();
   
 // 🎨 Temas disponíveis — cada um com cor principal e fundo escuro próprio
 const temas = {
