@@ -770,5 +770,38 @@ document.querySelector("#fastAddBtn").onclick = () => {
 };
 configurarEstrelas();
 </script>
+<script>
+// Função que ativa/desativa as estrelas
+function configurarEstrelas() {
+    const rating = document.getElementById("addEstrelas");
+    if (!rating) return;
+
+    const estrelas = rating.querySelectorAll("span");
+
+    estrelas.forEach(star => {
+        star.addEventListener("click", () => {
+            const value = parseInt(star.getAttribute("data-value"));
+
+            // remove ativo de todas
+            estrelas.forEach(s => s.classList.remove("active"));
+
+            // ativa todas até a clicada
+            for (let i = 0; i < estrelas.length; i++) {
+                if (parseInt(estrelas[i].dataset.value) <= value) {
+                    estrelas[i].classList.add("active");
+                }
+            }
+
+            // salva no próprio container (para usar ao adicionar música)
+            rating.dataset.rating = value;
+        });
+    });
+}
+
+// Ativa tudo quando a página carrega
+document.addEventListener("DOMContentLoaded", () => {
+    configurarEstrelas();
+});
+</script>
 </body>
 </html>
