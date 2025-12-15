@@ -117,7 +117,7 @@
         }
 
         .stat-value {
-            font-size: 28px;
+            font-size: 32px;
             font-weight: bold;
             color: #b8ff00;
             margin-bottom: 5px;
@@ -423,28 +423,104 @@
         }
 
         /* Theme Colors */
+        body.theme-green {
+            background: linear-gradient(135deg, #1a3a2a 0%, #2d5d47 100%);
+        }
+
+        body.theme-green .btn-add {
+            background: #4ade80;
+            color: #1a3a2a;
+        }
+
+        body.theme-green .btn-add:hover {
+            background: #22c55e;
+        }
+
+        body.theme-green .rating-btn.active {
+            background: #4ade80;
+            color: #1a3a2a;
+            border-color: #4ade80;
+            box-shadow: 0 0 20px rgba(74, 222, 128, 0.5);
+        }
+
         body.theme-purple {
-            background: linear-gradient(135deg, #2a1a3a 0%, #3d2557 100%);
+            background: linear-gradient(135deg, #3a1a4a 0%, #5d2d7a 100%);
+        }
+
+        body.theme-purple .btn-add {
+            background: #d946ef;
+            color: #3a1a4a;
+        }
+
+        body.theme-purple .btn-add:hover {
+            background: #e879f9;
+        }
+
+        body.theme-purple .rating-btn.active {
+            background: #d946ef;
+            color: #fff;
+            border-color: #d946ef;
+            box-shadow: 0 0 20px rgba(217, 70, 239, 0.5);
         }
 
         body.theme-blue {
-            background: linear-gradient(135deg, #1a2a3a 0%, #253d57 100%);
+            background: linear-gradient(135deg, #1a2a4a 0%, #2d4d7a 100%);
+        }
+
+        body.theme-blue .btn-add {
+            background: #3b82f6;
+            color: #fff;
+        }
+
+        body.theme-blue .btn-add:hover {
+            background: #60a5fa;
+        }
+
+        body.theme-blue .rating-btn.active {
+            background: #3b82f6;
+            color: #fff;
+            border-color: #3b82f6;
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
         }
 
         body.theme-red {
-            background: linear-gradient(135deg, #3a1a1a 0%, #5d2525 100%);
+            background: linear-gradient(135deg, #4a1a1a 0%, #7d2d2d 100%);
+        }
+
+        body.theme-red .btn-add {
+            background: #ef4444;
+            color: #fff;
+        }
+
+        body.theme-red .btn-add:hover {
+            background: #f87171;
+        }
+
+        body.theme-red .rating-btn.active {
+            background: #ef4444;
+            color: #fff;
+            border-color: #ef4444;
+            box-shadow: 0 0 20px rgba(239, 68, 68, 0.5);
         }
 
         body.theme-yellow {
-            background: linear-gradient(135deg, #3a3a1a 0%, #5d5d25 100%);
+            background: linear-gradient(135deg, #4a3a1a 0%, #7d6d2d 100%);
         }
 
-        body.theme-golden {
-            background: linear-gradient(135deg, #3a2a1a 0%, #5d4425 100%);
+        body.theme-yellow .btn-add {
+            background: #eab308;
+            color: #1a1a0a;
         }
 
-        body.theme-code {
-            background: linear-gradient(135deg, #0f1419 0%, #1a2332 100%);
+        body.theme-yellow .btn-add:hover {
+            background: #facc15;
+        }
+
+        body.theme-yellow .rating-btn.active {
+            background: #eab308;
+            color: #1a1a0a;
+            border-color: #eab308;
+            box-shadow: 0 0 20px rgba(234, 179, 8, 0.5);
         }
 
         /* Message */
@@ -484,8 +560,6 @@
                     <option value="blue">🔵 Azul</option>
                     <option value="red">🔴 Vermelho</option>
                     <option value="yellow">🟡 Amarelo</option>
-                    <option value="golden">🪙 Golden Pulse</option>
-                    <option value="code">📗 Code</option>
                 </select>
             </div>
         </div>
@@ -521,19 +595,19 @@
                     <div class="form-inputs">
                         <div>
                             <label>Música</label>
-                            <input type="text" id="musicName" placeholder="Ex: Abracadabra">
+                            <input type="text" id="musicName" placeholder="Ex: Galway Girl">
                         </div>
                         <div>
                             <label>Versão</label>
-                            <input type="text" id="version" placeholder="Ex: Normal, Extreme, Mashup...">
+                            <input type="text" id="version" placeholder="Ex: Just Dance 2024">
                         </div>
                         <div>
                             <label>Pontuação</label>
-                            <input type="number" id="score" placeholder="Ex: 11500">
+                            <input type="number" id="score" placeholder="Ex: 9500">
                         </div>
                         <div>
                             <label>Jogo</label>
-                            <input type="text" id="game" placeholder="Ex: JD2026, JD2025, JD2014...">
+                            <input type="text" id="game" placeholder="Ex: PS5">
                         </div>
                     </div>
 
@@ -637,9 +711,7 @@
             purple: 'theme-purple',
             blue: 'theme-blue',
             red: 'theme-red',
-            yellow: 'theme-yellow',
-            golden: 'theme-golden',
-            code: 'theme-code'
+            yellow: 'theme-yellow'
         };
 
         // Load theme from localStorage
@@ -669,9 +741,9 @@
                 ratingDisplay.textContent = 'Selecione um nível';
                 ratingDisplay.style.color = '#888';
             } else {
-                const ratingText = selectedRating === 'superstar' ? '🩵🩵🩵🩵🩵' : 
-                                  selectedRating === 'megastar' ? '🩷🩷🩷🩷🩷' : 
-                                  '💛'.repeat(selectedRating);
+                const ratingText = selectedRating === 'superstar' ? '⭐ Superstar' : 
+                                  selectedRating === 'megastar' ? '⭐ Megastar' : 
+                                  '⭐'.repeat(selectedRating);
                 ratingDisplay.textContent = ratingText;
                 ratingDisplay.style.color = '#b8ff00';
             }
@@ -747,9 +819,9 @@
                 (ratingOrder[s.rating] || 0) > (ratingOrder[max.rating] || 0) ? s : max
             );
 
-            const ratingText = bestRatingObj.rating === 'superstar' ? '🩵🩵🩵🩵🩵' : 
-                              bestRatingObj.rating === 'megastar' ? '🩷🩷🩷🩷🩷' : 
-                              '💛'.repeat(bestRatingObj.rating);
+            const ratingText = bestRatingObj.rating === 'superstar' ? '⭐ Superstar' : 
+                              bestRatingObj.rating === 'megastar' ? '⭐ Megastar' : 
+                              '⭐'.repeat(bestRatingObj.rating);
             document.getElementById('bestRating').textContent = ratingText;
         }
 
@@ -784,9 +856,9 @@
             }
 
             tbody.innerHTML = filtered.map(s => {
-                const ratingDisplay = s.rating === 'superstar' ? '<span class="superstar-badge">🩵🩵🩵🩵🩵</span>' :
-                                     s.rating === 'megastar' ? '<span class="megastar-badge">🩷🩷🩷🩷🩷</span>' :
-                                     `<span class="stars">${'💛'.repeat(s.rating)}</span>`;
+                const ratingDisplay = s.rating === 'superstar' ? '<span class="superstar-badge">⭐ Superstar</span>' :
+                                     s.rating === 'megastar' ? '<span class="megastar-badge">⭐ Megastar</span>' :
+                                     `<span class="stars">${'⭐'.repeat(s.rating)}</span>`;
 
                 return `
                     <tr>
