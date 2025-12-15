@@ -331,6 +331,19 @@ header.main-header {
   filter: drop-shadow(0 0 6px #ff4adf);
   opacity: 1;
 }
+  /* Quando superstar ativa: todas as estrelas ficam azuis */
+.star-rating.superstar-mode span {
+  color: #4aa3ff !important;
+  filter: none !important;
+  opacity: 1 !important;
+}
+
+/* Quando megastar ativa: todas as estrelas ficam rosa/magenta */
+.star-rating.megastar-mode span {
+  color: #ff4ad8 !important;
+  filter: none !important;
+  opacity: 1 !important;
+}
 </style>
 </head>
 <body>
@@ -805,6 +818,35 @@ function configurarEstrelas() {
 // Ativa tudo quando a página carrega
 document.addEventListener("DOMContentLoaded", () => {
     configurarEstrelas();
+});
+  const rating = document.getElementById("addEstrelas");
+const stars = rating.querySelectorAll("span");
+
+stars.forEach(star => {
+  star.addEventListener("click", () => {
+    const val = Number(star.dataset.value);
+
+    // remove as marcas anteriores
+    rating.classList.remove("superstar-mode", "megastar-mode");
+    stars.forEach(s => s.classList.remove("active"));
+
+    // ativa até a selecionada
+    stars.forEach(s => {
+      if (Number(s.dataset.value) <= val) {
+        s.classList.add("active");
+      }
+    });
+
+    // se clicou superstar (6)
+    if (val === 6) {
+      rating.classList.add("superstar-mode");
+    }
+
+    // se clicou megastar (7)
+    if (val === 7) {
+      rating.classList.add("megastar-mode");
+    }
+  });
 });
 </script>
 </body>
