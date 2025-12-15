@@ -671,7 +671,7 @@
             } else {
                 const ratingText = selectedRating === 'superstar' ? '🩵🩵🩵🩵🩵' : 
                                   selectedRating === 'megastar' ? '🩷🩷🩷🩷🩷' : 
-                                  '⭐'.repeat(selectedRating);
+                                  '💛'.repeat(selectedRating);
                 ratingDisplay.textContent = ratingText;
                 ratingDisplay.style.color = '#b8ff00';
             }
@@ -749,7 +749,7 @@
 
             const ratingText = bestRatingObj.rating === 'superstar' ? '🩵🩵🩵🩵🩵' : 
                               bestRatingObj.rating === 'megastar' ? '🩷🩷🩷🩷🩷' : 
-                              '⭐'.repeat(bestRatingObj.rating);
+                              '💛'.repeat(bestRatingObj.rating);
             document.getElementById('bestRating').textContent = ratingText;
         }
 
@@ -786,7 +786,7 @@
             tbody.innerHTML = filtered.map(s => {
                 const ratingDisplay = s.rating === 'superstar' ? '<span class="superstar-badge">🩵🩵🩵🩵🩵</span>' :
                                      s.rating === 'megastar' ? '<span class="megastar-badge">🩷🩷🩷🩷🩷</span>' :
-                                     `<span class="stars">${'⭐'.repeat(s.rating)}</span>`;
+                                     `<span class="stars">${'💛'.repeat(s.rating)}</span>`;
 
                 return `
                     <tr>
