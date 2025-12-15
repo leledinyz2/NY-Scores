@@ -526,9 +526,12 @@ document.querySelector("#refreshBtn").onclick = () => {
 // ==============================
 // INICIALIZAR
 // ==============================
-criarFormulario();
-atualizarTabela();
-atualizarStats();
+document.addEventListener("DOMContentLoaded", () => {
+    criarFormulario();
+    atualizarTabela();
+    atualizarStats();
+});
+;
 </script>
   <script>
 document.querySelector("#btnAddScore").onclick = () => {
