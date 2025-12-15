@@ -276,6 +276,24 @@ header.main-header {
   margin-left: 15px;
   cursor: pointer;
   }
+
+  .star-rating {
+  display: flex;
+  gap: 6px;
+  font-size: 26px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.star-rating span {
+  opacity: 0.35;
+  transition: 0.15s;
+}
+
+.star-rating span.active {
+  opacity: 1;
+  filter: drop-shadow(0 0 3px #ffe46b);
+}
 </style>
 </head>
 <body>
@@ -368,15 +386,13 @@ header.main-header {
 
         <div class="control">
             <label>Estrelas</label>
-            <select id="fastStars">
-                <option value="⭐">1 ⭐</option>
-                <option value="⭐⭐">2 ⭐</option>
-                <option value="⭐⭐⭐">3 ⭐</option>
-                <option value="⭐⭐⭐⭐">4 ⭐</option>
-                <option value="⭐⭐⭐⭐⭐">5 ⭐</option>
-               <option value="🩵🩵🩵🩵🩵">Superstar</option>
-               <option value="🩷🩷🩷🩷🩷">Megastar</option>
-            </select>
+            <div class="star-rating" id="addEstrelas">
+  <span data-value="1">⭐</span>
+  <span data-value="2">⭐</span>
+  <span data-value="3">⭐</span>
+  <span data-value="4">⭐</span>
+  <span data-value="5">⭐</span>
+         </div>
         </div>
 
         <div class="control">
@@ -541,6 +557,30 @@ document.addEventListener("DOMContentLoaded", () => {
     atualizarStats();
 });
 ;
+
+  function configurarEstrelas() {
+  const container = document.querySelector("#addEstrelas");
+  let valor = 1; // padrão
+
+  function atualizar() {
+    container.querySelectorAll("span").forEach(star => {
+      const v = Number(star.dataset.value);
+      star.classList.toggle("active", v <= valor);
+    });
+  }
+
+  container.querySelectorAll("span").forEach(star => {
+    star.addEventListener("click", () => {
+      valor = Number(star.dataset.value);
+      atualizar();
+    });
+  });
+
+  // retorna sempre o valor atual
+  return () => valor;
+}
+
+let pegarEstrelas = configurarEstrelas();
   
 // 🎨 Temas disponíveis — cada um com cor principal e fundo escuro próprio
 const temas = {
