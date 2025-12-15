@@ -850,7 +850,7 @@ document.addEventListener("DOMContentLoaded", () => {
         star.addEventListener("click", () => {
             const value = Number(star.dataset.value);
 
-            // Remove modos especiais antes de aplicar outro
+            // Remove modos especiais
             starBlock.classList.remove("superstar-mode", "megastar-mode");
 
             // Limpa todas as estrelas
@@ -863,18 +863,25 @@ document.addEventListener("DOMContentLoaded", () => {
                         s.classList.add("active");
                     }
                 });
-                return; // garante que não aplique superstar/megastar
-            }
-
-            // Modo superstar (6)
-            if (value === 6) {
-                starBlock.classList.add("superstar-mode");
                 return;
             }
 
-            // Modo megastar (7)
+            // SUPERSTAR (6)
+            if (value === 6) {
+                starBlock.classList.add("superstar-mode");
+                star.classList.add("active"); // <-- ESSENCIAL
+                return;
+            }
+
+            // MEGASTAR (7)
             if (value === 7) {
                 starBlock.classList.add("megastar-mode");
+                star.classList.add("active"); // <-- ESSENCIAL
+                return;
+            }
+        });
+    });
+});
 </script>
 </body>
 </html>
