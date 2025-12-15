@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="pt-BR">
 <head>
@@ -256,16 +257,18 @@ header.main-header {
   border: 1px solid rgba(255, 255, 255, 0.08) !important;
   box-shadow: none !important;
 }
-  input, button {
-            padding: 8px;
-            margin: 5px 0;
-        }
-  .score-item {
-            padding: 8px;
-            background: #eee;
-            margin-bottom: 5px;
-            border-radius: 5px;
-        }
+  .mirellys {
+  display: inline-block;
+  border-radius: 12px;
+  background-color: #7e2c48;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 14px;
+  padding: 14px;
+  margin-left: 15px;
+  cursor: pointer;
+  }
 </style>
 </head>
 <body>
@@ -290,6 +293,7 @@ header.main-header {
     <option value="azulFuturista">🪙 Golden Pulse</option>
     <option value="code">📗 Code</option>
   </select>
+          <button class="mirellys" onclick="window.location.href='mirellys.html';">Mirelly</button>
 </div>
       </div>
     </header>
@@ -322,27 +326,6 @@ header.main-header {
         <h3>Como usar</h3>
         <p>Escolha o número mínimo de estrelas e/ou digite parte do nome da música. A tabela abaixo será atualizada automaticamente.</p>
         <div style="margin-top:14px">
-          <label>Música:</label>
-    <input id="musicName" type="text">
-
-    <label>Pontuação:</label>
-    <input id="scoreValue" type="number">
-
-    <button onclick="addScore()">Adicionar</button>
-    <button onclick="clearScores()">Limpar tudo</button>
-
-    <h2>Pontuações</h2>
-    <div id="scoreList"></div>
-          <div class="badge">Sincronização: planilha pública</div>
-        </div>
-      </aside>
-    </section>
-
-    <aside class="side-card" aria-label="Informações rápidas">
-        <h3>Como usar</h3>
-        <p>Escolha o número mínimo de estrelas e/ou digite parte do nome da música. A tabela abaixo será atualizada automaticamente.</p>
-        <div style="margin-top:14px">
-    <div id="scoreList"></div>
           <div class="badge">Sincronização: planilha pública</div>
         </div>
       </aside>
@@ -400,150 +383,170 @@ header.main-header {
   </div>
 
 <script>
-  // ------------------------------
-// SISTEMA DE PONTUAÇÕES LOCAL
-// ------------------------------
+// ==============================
+// BANCO LOCAL
+// ==============================
 
-let scores = JSON.parse(localStorage.getItem("scoresJD")) || [];
-
-// Salvar no localStorage
-function saveScores() {
-    localStorage.setItem("scoresJD", JSON.stringify(scores));
+function carregarBanco() {
+    const salvo = localStorage.getItem("placarJD");
+    return salvo ? JSON.parse(salvo) : [];
 }
 
-// Adicionar pontuação
-function addScore() {
-    const music = document.getElementById("musicName").value.trim();
-    const score = parseInt(document.getElementById("scoreValue").value.trim());
-
-    if (!music || !score) {
-        alert("Preencha música e pontuação!");
-        return;
-    }
-
-    // Criar item
-    scores.push({
-        musica: music,
-        score: score,
-        estrelas: calcularEstrelas(score), // gera estrelas automaticamente
-        versao: "Normal",
-        jogo: "Just Dance"
-    });
-
-    saveScores();
-    renderList();
-    renderTable();
-
-    document.getElementById("musicName").value = "";
-    document.getElementById("scoreValue").value = "";
+function salvarBanco(data) {
+    localStorage.setItem("placarJD", JSON.stringify(data));
 }
 
-// Limpar tudo
-function clearScores() {
-    if (!confirm("Tem certeza que quer apagar TUDO?")) return;
-    scores = [];
-    saveScores();
-    renderList();
-    renderTable();
-}
+let banco = carregarBanco();
 
-// Renderizar lista simples
-function renderList() {
-    const list = document.getElementById("scoreList");
-    list.innerHTML = "";
+// ==============================
+// ADICIONAR MUSICA
+// ==============================
 
-    scores.forEach((item, i) => {
-        const div = document.createElement("div");
-        div.className = "score-item";
-        div.innerHTML = `
-            ${item.musica} — ${item.score} pontos — ⭐${item.estrelas}
-            <button onclick="deleteScore(${i})">🗑️</button>
-        `;
-        list.appendChild(div);
-    });
-}
-
-function deleteScore(i) {
-    scores.splice(i, 1);
-    saveScores();
-    renderList();
-    renderTable();
-}
-
-// ------------------------------
-// TABELA PRINCIPAL
-// ------------------------------
-
-function renderTable() {
-    const tbody = document.querySelector("#tabela tbody");
-    tbody.innerHTML = "";
-
-    // filtros
-    const filtroEstrelas = parseInt(document.getElementById("filtroEstrelas").value);
-    const busca = document.getElementById("buscaMusica").value.toLowerCase();
-
-    scores
-        .filter(s => s.estrelas >= filtroEstrelas)
-        .filter(s => s.musica.toLowerCase().includes(busca))
-        .forEach(s => {
-            const tr = document.createElement("tr");
-            tr.innerHTML = `
-                <td>${s.musica}</td>
-                <td>${s.versao}</td>
-                <td>${s.score}</td>
-                <td>${"⭐".repeat(s.estrelas)}</td>
-                <td>${s.jogo}</td>
-            `;
-            tbody.appendChild(tr);
-        });
-
+function adicionarMusica(musica, versao, pontuacao, estrelas, jogo) {
+    banco.push({ musica, versao, pontuacao, estrelas, jogo });
+    salvarBanco(banco);
+    atualizarTabela();
     atualizarStats();
 }
 
-// ------------------------------
-// ESTRELAS AUTOMÁTICAS
-// ------------------------------
+// ==============================
+// UI: FORMULÁRIO DE ADIÇÃO
+// ==============================
 
-function calcularEstrelas(pontuacao) {
-    if (pontuacao >= 12500) return 5;
-    if (pontuacao >= 11000) return 4;
-    if (pontuacao >= 10000) return 3;
-    if (pontuacao >= 8000) return 2;
-    if (pontuacao >= 5000) return 1;
-    return 0;
+function criarFormulario() {
+    const painel = document.querySelector(".main-panel");
+    const form = document.createElement("div");
+    form.style.marginBottom = "20px";
+
+    form.innerHTML = `
+      <h3 style="color:var(--accent-lime)">Adicionar música</h3>
+
+      <div class="controls" style="margin-top:10px">
+
+        <div class="control">
+          <label>Música</label>
+          <input id="addMusica" type="text" placeholder="Nome da música">
+        </div>
+
+        <div class="control">
+          <label>Versão</label>
+          <input id="addVersao" type="text" placeholder="Classic, Alt, Extreme...">
+        </div>
+
+        <div class="control">
+          <label>Pontuação</label>
+          <input id="addPontuacao" type="text" placeholder="Ex: 12845">
+        </div>
+
+        <div class="control">
+          <label>Estrelas</label>
+          <select id="addEstrelas">
+            <option value="1">1 ⭐</option>
+            <option value="2">2 ⭐</option>
+            <option value="3">3 ⭐</option>
+            <option value="4">4 ⭐</option>
+            <option value="5">5 ⭐</option>
+          </select>
+        </div>
+
+        <div class="control">
+          <label>Jogo</label>
+          <input id="addJogo" type="text" placeholder="JD 2019, 2023, etc">
+        </div>
+
+        <button id="btnAdd" class="pill" 
+          style="margin-left:10px;height:42px;background:var(--accent-lime);color:#181818">
+          Adicionar
+        </button>
+
+      </div>
+    `;
+
+    painel.prepend(form);
+
+    document.querySelector("#btnAdd").onclick = () => {
+        const m = document.querySelector("#addMusica").value.trim();
+        const v = document.querySelector("#addVersao").value.trim();
+        const p = document.querySelector("#addPontuacao").value.trim();
+        const e = document.querySelector("#addEstrelas").value.trim();
+        const j = document.querySelector("#addJogo").value.trim();
+
+        if (!m) return alert("Coloque o nome da música!");
+
+        adicionarMusica(m, v, p, e, j);
+
+        document.querySelector("#addMusica").value = "";
+    };
 }
 
-// ------------------------------
-// ESTATÍSTICAS DO TOPO
-// ------------------------------
+// ==============================
+// TABELA
+// ==============================
+
+function atualizarTabela() {
+    const tbody = document.querySelector("#tabela tbody");
+    tbody.innerHTML = "";
+
+    const filtroEstrelas = Number(document.querySelector("#filtroEstrelas").value);
+    const busca = document.querySelector("#buscaMusica").value.toLowerCase();
+
+    banco
+      .filter(item =>
+        item.musica.toLowerCase().includes(busca) &&
+        Number(item.estrelas) >= filtroEstrelas
+      )
+      .forEach(d => {
+        const tr = document.createElement("tr");
+
+        tr.innerHTML = `
+          <td>${d.musica}</td>
+          <td>${d.versao}</td>
+          <td>${d.pontuacao}</td>
+          <td>${d.estrelas}</td>
+          <td>${d.jogo}</td>
+        `;
+
+        tbody.appendChild(tr);
+      });
+}
+
+// ==============================
+// ESTATÍSTICAS
+// ==============================
 
 function atualizarStats() {
-    const total = scores.length;
-    document.getElementById("totalSongs").innerText = total;
+    const total = banco.length;
+    const melhor = banco.length
+        ? Math.max(...banco.map(x => Number(x.pontuacao) || 0))
+        : "—";
 
-    if (total === 0) {
-        document.getElementById("avgScore").innerText = "—";
-        document.getElementById("topStar").innerText = "—";
-        return;
-    }
+    const melhorEstrela = banco.length
+        ? Math.max(...banco.map(x => Number(x.estrelas)))
+        : "—";
 
-    const melhor = Math.max(...scores.map(s => s.score));
-    const starMax = Math.max(...scores.map(s => s.estrelas));
-
-    document.getElementById("avgScore").innerText = melhor;
-    document.getElementById("topStar").innerText = "⭐".repeat(starMax);
+    document.querySelector("#totalSongs").textContent = total;
+    document.querySelector("#avgScore").textContent = melhor;
+    document.querySelector("#topStar").textContent = melhorEstrela;
 }
 
-// ------------------------------
+// ==============================
 // EVENTOS
-// ------------------------------
-document.getElementById("filtroEstrelas").addEventListener("change", renderTable);
-document.getElementById("buscaMusica").addEventListener("input", renderTable);
-document.getElementById("refreshBtn").addEventListener("click", renderTable);
+// ==============================
 
-// Inicialização
-renderList();
-renderTable();
+document.querySelector("#filtroEstrelas").onchange = atualizarTabela;
+document.querySelector("#buscaMusica").oninput = atualizarTabela;
+
+document.querySelector("#refreshBtn").onclick = () => {
+    atualizarTabela();
+    atualizarStats();
+};
+
+// ==============================
+// INICIALIZAR
+// ==============================
+criarFormulario();
+atualizarTabela();
+atualizarStats();
 </script>
 </body>
 </html>
