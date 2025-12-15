@@ -728,7 +728,7 @@ document.querySelector("#fastAddBtn").onclick = () => {
     const m = document.querySelector("#fastMusic").value.trim();
     const v = document.querySelector("#fastVersion").value.trim();
     const p = document.querySelector("#fastScore").value.trim();
-    const e = document.querySelector("#fastStars").value.trim();
+    const e = document.querySelector("#addEstrelas").dataset.rating || 0; // Lê o valor do data-rating
     const g = document.querySelector("#fastGame").value.trim();
 
     if (!m || !p) {
