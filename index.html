@@ -863,6 +863,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         s.classList.add("active");
                     }
                 });
+                starBlock.dataset.rating = value; // Adiciona esta linha
                 return;
             }
 
@@ -870,6 +871,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (value === 6) {
                 starBlock.classList.add("superstar-mode");
                 star.classList.add("active"); // <-- ESSENCIAL
+                starBlock.dataset.rating = value; // Adiciona esta linha
                 return;
             }
 
@@ -877,6 +879,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (value === 7) {
                 starBlock.classList.add("megastar-mode");
                 star.classList.add("active"); // <-- ESSENCIAL
+                starBlock.dataset.rating = value; // Adiciona esta linha
                 return;
             }
         });
