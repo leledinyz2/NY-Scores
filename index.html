@@ -264,100 +264,37 @@ header.main-header {
   border: 1px solid rgba(255, 255, 255, 0.08) !important;
   box-shadow: none !important;
 }
-  .mirellys {
-  display: inline-block;
-  border-radius: 12px;
-  background-color: #7e2c48;
-  border: none;
-  color: #FFFFFF;
-  text-align: center;
-  font-size: 14px;
-  padding: 14px;
-  margin-left: 15px;
-  cursor: pointer;
-  }
-
-  .star-rating {
-  display: flex;
-  gap: 6px;
-  font-size: 26px;
-  cursor: pointer;
-  user-select: none;
-}
-
-.star-rating span {
-  opacity: 0.35;
-  transition: 0.15s;
-}
-
-.star-rating span.active {
-  opacity: 1;
-  filter: drop-shadow(0 0 3px #ffe46b);
-}
-
+  /* container */
 .star-rating {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  cursor: pointer;
-  user-select: none;
+    display: flex;
+    gap: 8px;
+    user-select: none;
+    cursor: pointer;
+    font-size: 28px;
 }
 
-.star-rating span {
-  font-size: 26px;
-  opacity: 0.35;
-  transition: 0.15s;
-}
-
-.star-rating span.active {
-  opacity: 1;
-  filter: drop-shadow(0 0 4px #ffe46b);
-}
-
-/* Superstar azul */
-.star-rating .superstar {
-  color: #4aa3ff;
-}
-.star-rating .superstar.active {
-  filter: drop-shadow(0 0 6px #4aa3ff);
-  opacity: 1;
-}
-
-/* Megastar rosa/magenta */
-.star-rating .megastar {
-  color: #ff4ad8;
-}
-.star-rating .megastar.active {
-  filter: drop-shadow(0 0 6px #ff4adf);
-  opacity: 1;
-}
-  /* Quando superstar ativa: todas as estrelas ficam azuis */
-.star-rating.superstar-mode span {
-  color: #4aa3ff !important;
-  filter: none !important;
-  opacity: 1 !important;
-}
-
-/* Quando megastar ativa: todas as estrelas ficam rosa/magenta */
-.star-rating.megastar-mode span {
-  color: #ff4ad8 !important;
-  filter: none !important;
-  opacity: 1 !important;
-}
-  /* todas as estrelas normais */
+/* estado padrão */
 .star-rating span {
     color: #ffd84d;
-    transition: color 0.2s ease;
+    opacity: 0.35;
+    transition: 0.15s ease;
 }
 
-/* todas azul no modo superstar */
+/* estrelas ativadas */
+.star-rating span.active {
+    opacity: 1;
+}
+
+/* modo superstar – tudo azul */
 .star-rating.superstar-mode span {
     color: #4aa3ff !important;
+    opacity: 1 !important;
 }
 
-/* todas rosa no modo megastar */
+/* modo megastar – tudo rosa */
 .star-rating.megastar-mode span {
     color: #ff4ad8 !important;
+    opacity: 1 !important;
 }
 </style>
 </head>
