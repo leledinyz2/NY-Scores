@@ -117,14 +117,14 @@
         }
 
         .stat-value {
-            font-size: 32px;
+            font-size: 28px;
             font-weight: bold;
             color: #b8ff00;
             margin-bottom: 5px;
         }
 
         .stat-label {
-            font-size: 12px;
+            font-size: 10px;
             color: #aaa;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -619,8 +619,8 @@
                             <button class="rating-btn" data-rating="3">3</button>
                             <button class="rating-btn" data-rating="4">4</button>
                             <button class="rating-btn" data-rating="5">5</button>
-                            <button class="rating-btn" data-rating="superstar">Superstar</button>
-                            <button class="rating-btn" data-rating="megastar">Megastar</button>
+                            <button class="rating-btn" data-rating="superstar">Super</button>
+                            <button class="rating-btn" data-rating="megastar">Mega</button>
                         </div>
                         <div id="selectedRating" style="color: #b8ff00; font-size: 14px; margin-top: 10px;">Selecione um nível</div>
                     </div>
@@ -647,8 +647,8 @@
                                 <option value="3">3⭐+</option>
                                 <option value="4">4⭐+</option>
                                 <option value="5">5⭐+</option>
-                                <option value="superstar">Superstar+</option>
-                                <option value="megastar">Megastar</option>
+                                <option value="superstar">Super+</option>
+                                <option value="megastar">Mega</option>
                             </select>
                         </div>
                         <div>
@@ -741,9 +741,9 @@
                 ratingDisplay.textContent = 'Selecione um nível';
                 ratingDisplay.style.color = '#888';
             } else {
-                const ratingText = selectedRating === 'superstar' ? '⭐ Superstar' : 
-                                  selectedRating === 'megastar' ? '⭐ Megastar' : 
-                                  '⭐'.repeat(selectedRating);
+                const ratingText = selectedRating === 'superstar' ? '🩵🩵🩵🩵🩵' : 
+                                  selectedRating === 'megastar' ? '🩷🩷🩷🩷🩷' : 
+                                  '💛'.repeat(selectedRating);
                 ratingDisplay.textContent = ratingText;
                 ratingDisplay.style.color = '#b8ff00';
             }
@@ -819,9 +819,9 @@
                 (ratingOrder[s.rating] || 0) > (ratingOrder[max.rating] || 0) ? s : max
             );
 
-            const ratingText = bestRatingObj.rating === 'superstar' ? '⭐ Superstar' : 
-                              bestRatingObj.rating === 'megastar' ? '⭐ Megastar' : 
-                              '⭐'.repeat(bestRatingObj.rating);
+            const ratingText = bestRatingObj.rating === 'superstar' ? '🩵🩵🩵🩵🩵' : 
+                              bestRatingObj.rating === 'megastar' ? '🩷🩷🩷🩷🩷' : 
+                              '💛'.repeat(bestRatingObj.rating);
             document.getElementById('bestRating').textContent = ratingText;
         }
 
@@ -856,9 +856,9 @@
             }
 
             tbody.innerHTML = filtered.map(s => {
-                const ratingDisplay = s.rating === 'superstar' ? '<span class="superstar-badge">⭐ Superstar</span>' :
-                                     s.rating === 'megastar' ? '<span class="megastar-badge">⭐ Megastar</span>' :
-                                     `<span class="stars">${'⭐'.repeat(s.rating)}</span>`;
+                const ratingDisplay = s.rating === 'superstar' ? '<span class="superstar-badge">🩵🩵🩵🩵🩵</span>' :
+                                     s.rating === 'megastar' ? '<span class="megastar-badge">🩷🩷🩷🩷🩷</span>' :
+                                     `<span class="stars">${'💛'.repeat(s.rating)}</span>`;
 
                 return `
                     <tr>
