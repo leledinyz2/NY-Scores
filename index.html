@@ -269,23 +269,41 @@ header.main-header {
 .star-rating span {
     font-size: 30px;
     cursor: pointer;
-    color: #ffce00; /* amarelo */
+    color: #ffce00; /* Coração amarelo (1-5) */
     text-shadow: 0 0 3px rgba(0,0,0,0.4); /* deixa do mesmo tamanho visual */
+    opacity: 0.3; /* Corações não ativas semi-transparentes */
 }
 
 /* Estrela ativa no modo normal (1–5) */
 .star-rating span.active {
-    color: #ffce00;
+    color: #ffce00; /* Coração ativo amarelo */
+    text-shadow: 0 0 8px #ffce00, 0 0 12px #ffce00; /* Brilho amarelo */
+    opacity: 1 !important; /* Garante opacidade total no coração ativo */
 }
+
 
 /* SUPERSTAR: todas azuis + estrela azul */
 .star-rating.superstar-mode span {
-    color: #3aa0ff !important; /* azul puro */
+    color: #3aa0ff !important; /* Coração azul (6) */
+    text-shadow: 0 0 3px rgba(0,0,0,0.4); /* Remove o brilho geral */
+    opacity: 1; /* Corações visíveis */
+}
+.star-rating.superstar-mode span.active {
+    color: #3aa0ff !important; /* Coração ativo azul */
+    text-shadow: 0 0 8px #3aa0ff, 0 0 12px #3aa0ff; /* Aplica brilho azul no coração ativo */
+    opacity: 1 !important; /* Garante opacidade total no coração ativo */
 }
 
 /* MEGASTAR: todas rosas */
 .star-rating.megastar-mode span {
-    color: #ff4fd8 !important; /* rosa/magenta */
+    color: #ff4fd8 !important; /* Coração rosa (7) */
+    text-shadow: 0 0 3px rgba(0,0,0,0.4); /* Remove o brilho geral */
+    opacity: 1; /* Corações visíveis */
+}
+.star-rating.megastar-mode span.active {
+    color: #ff4fd8 !important; /* Coração ativo rosa */
+    text-shadow: 0 0 8px #ff4fd8, 0 0 12px #ff4fd8; /* Aplica brilho rosa no coração ativo */
+    opacity: 1 !important; /* Garante opacidade total no coração ativo */
 }
 </style>
 </head>
@@ -380,13 +398,13 @@ header.main-header {
         <div class="control">
             <label>Estrelas</label>
             <div class="star-rating" id="addEstrelas">
-  <span data-value="1">⭐</span>
-  <span data-value="2">⭐</span>
-  <span data-value="3">⭐</span>
-  <span data-value="4">⭐</span>
-  <span data-value="5">⭐</span>
-  <span class="superstar" data-value="6">⭐</span>
-  <span class="megastar" data-value="7">⭐</span>
+  <span data-value="1">★</span>
+  <span data-value="2">★</span>
+  <span data-value="3">★</span>
+  <span data-value="4">★</span>
+  <span data-value="5">★</span>
+  <span class="superstar" data-value="6">★</span>
+  <span class="megastar" data-value="7">★</span>
          </div>
         </div>
 
