@@ -265,45 +265,27 @@ header.main-header {
   box-shadow: none !important;
 }
 
-  /* ⭐ Estrelas padrão (normais) */
+  /* Mantém as estrelas normais amarelas */
 .star-rating span {
-    color: #ffd84d;
-    opacity: 0.35;
-    transition: 0.15s;
+    font-size: 30px;
+    cursor: pointer;
+    color: #ffce00; /* amarelo */
+    text-shadow: 0 0 3px rgba(0,0,0,0.4); /* deixa do mesmo tamanho visual */
 }
 
-/* Quando uma estrela normal está ativa */
-.star-rating span.active:not(.superstar):not(.megastar) {
-    opacity: 1;
-    filter: drop-shadow(0 0 4px #ffe46b);
+/* Estrela ativa no modo normal (1–5) */
+.star-rating span.active {
+    color: #ffce00;
 }
 
-/* ⭐ Superstar individual (caso só clique nela) */
-.star-rating .superstar.active {
-    color: #4aa3ff;
-    opacity: 1;
-    filter: drop-shadow(0 0 6px #4aa3ff);
-}
-
-/* ⭐ Megastar individual */
-.star-rating .megastar.active {
-    color: #ff4ad8;
-    opacity: 1;
-    filter: drop-shadow(0 0 6px #ff4ad8);
-}
-
-/* ⭐ MODO SUPERSTAR — todas as estrelas ficam azuis */
+/* SUPERSTAR: todas azuis + estrela azul */
 .star-rating.superstar-mode span {
-    color: #4aa3ff !important;
-    opacity: 1 !important;
-    filter: drop-shadow(0 0 6px #4aa3ff) !important;
+    color: #3aa0ff !important; /* azul puro */
 }
 
-/* ⭐ MODO MEGASTAR — todas as estrelas ficam rosas */
+/* MEGASTAR: todas rosas */
 .star-rating.megastar-mode span {
-    color: #ff4ad8 !important;
-    opacity: 1 !important;
-    filter: drop-shadow(0 0 6px #ff4ad8) !important;
+    color: #ff4fd8 !important; /* rosa/magenta */
 }
 </style>
 </head>
