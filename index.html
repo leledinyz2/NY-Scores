@@ -1,890 +1,823 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>🎵 Placar Just Dance do Lele 🎵</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Placar Just Dance do Lele</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
-<link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/6373/6373791.png">
-<meta name="theme-color" content="#FFD56B">
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #2a1a3a 0%, #3d2557 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #fff;
+        }
 
-<style>
-  :root {
-  /* Cores de fundo — trocadas dinamicamente pelo tema */
-  --bg-deep: #44386b;  /* topo */
-  --bg-mid: #3b3160;   /* meio */
-  --bg-low: #2f2547;   /* base */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
 
-  /* Efeitos visuais */
-  --glass: rgba(255,255,255,0.04);
-  --glass-2: rgba(255,255,255,0.06);
+        /* Header */
+        .header {
+            background: rgba(60, 30, 80, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(200, 150, 255, 0.2);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
 
-  /* Cor de destaque */
-  --accent-lime: #bfff3b;
-  --accent-soft: rgba(191,255,59,0.12);
+        .header-title {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 28px;
+            font-weight: bold;
+        }
 
-  /* Outros */
-  --card: rgba(12,8,20,0.6);
-  --text: #eef0f6;
-  --muted: #cfcfe0;
-  --shadow-dark: rgba(10,7,20,0.7);
-  --neum-inset: rgba(0,0,0,0.45);
-}
+        .header-title span {
+            font-size: 32px;
+        }
 
-  *{box-sizing:border-box}
-  html,body{height:100%}
-  body{
-    margin:0;
-  font-family: "Nunito", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-  background:
-    radial-gradient(1200px 600px at 10% 10%, rgba(255,255,255,0.02), transparent 8%),
-    linear-gradient(180deg, var(--bg-deep) 0%, var(--bg-mid) 30%, var(--bg-low) 100%);
-  color:var(--text);
-  -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
-  padding:28px;
-  transition: background 0.8s ease, color 0.3s ease;
-  }
+        .theme-selector {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
 
-  /* page wrapper */
-  .page {
-    max-width:1100px;
-    margin:20px auto;
-    display:grid;
-    gap:20px;
-    grid-template-columns: 1fr;
-  }
+        .theme-selector select {
+            padding: 8px 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(200, 150, 255, 0.3);
+            background: rgba(60, 30, 80, 0.8);
+            color: #fff;
+            cursor: pointer;
+            font-size: 14px;
+        }
 
-  /* header (glass + neumorphism) */
-  header.main-header{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:16px;
-    padding:18px 22px;
-    border-radius:20px;
-    position:relative;
-    background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
-    border:1px solid rgba(255,255,255,0.04);
-    backdrop-filter: blur(8px) saturate(140%);
-    box-shadow:
-      10px 14px 30px rgba(0,0,0,0.5),
-      inset -6px -6px 18px rgba(255,255,255,0.02);
-  }
+        /* Main Grid */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
 
-  .brand {
-    display:flex;
-    gap:12px;
-    align-items:center;
-  }
-  .logo-circle{
-    width:56px;height:56px;border-radius:12px;
-    background: linear-gradient(135deg, rgba(255,255,255,0.02), rgba(0,0,0,0.12));
-    border:1px solid rgba(255,255,255,0.03);
-    display:flex;align-items:center;justify-content:center;
-    font-weight:700;color:var(--accent-lime);
-    font-size:20px;
-    box-shadow: 6px 8px 18px rgba(0,0,0,0.4), inset -6px -6px 14px rgba(255,255,255,0.02);
-  }
-  .title-area h1{margin:0;font-size:1.15rem;letter-spacing:0.2px}
-  .title-area p{margin:2px 0 0 0;color:var(--muted);font-size:0.88rem}
+        @media (max-width: 1024px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+        }
 
-  .header-actions{display:flex;gap:10px;align-items:center}
-  .pill{
-    padding:8px 14px;border-radius:999px;border:1px solid rgba(255,255,255,0.04);
-    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.12));
-    color:var(--text);font-weight:600;cursor:pointer;
-    box-shadow: 6px 8px 18px rgba(0,0,0,0.4)), inset -4px -4px 10px rgba(255,255,255,0.02);
-  }
-  .pill.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);font-weight:600}
+        /* Card Styles */
+        .card {
+            background: rgba(60, 30, 80, 0.4);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(200, 150, 255, 0.2);
+            border-radius: 20px;
+            padding: 30px;
+        }
 
-  /* hero section */
-  .hero{
-    display:grid;
-    grid-template-columns: 1fr 320px;
-    gap:20px;
-    align-items:stretch;
-  }
+        .card-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #b8ff00;
+        }
 
-  .hero-card{
-    border-radius:20px;
-    padding:22px;
-    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.12));
-    border:1px solid rgba(255,255,255,0.03);
-    box-shadow: 6px 8px 18px rgba(0,0,0,0.4);
-    position:relative;
-    overflow:hidden;
-  }
+        /* Stats Section */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 20px;
+        }
 
-  .hero-card:before{
-    /* subtle decorative rounded shape like example */
-    content:"";
-    position:absolute;
-    right:-120px;top:-60px;width:420px;height:420px;border-radius:50%;
-    background: radial-gradient(circle at 30% 30%, rgba(183,255,59,0.06), transparent 35%);
-    transform:rotate(-20deg);
-    pointer-events:none;
-  }
+        .stat-item {
+            text-align: center;
+            padding: 15px;
+            background: rgba(184, 255, 0, 0.1);
+            border-radius: 15px;
+            border: 1px solid rgba(184, 255, 0, 0.2);
+        }
 
-  .hero-text h2{margin:0;font-size:1.6rem;color:var(--text)}
-  .hero-text p{color:var(--muted);margin-top:10px;line-height:1.45}
+        .stat-value {
+            font-size: 32px;
+            font-weight: bold;
+            color: #b8ff00;
+            margin-bottom: 5px;
+        }
 
-  .stat-block{
-    margin-top:16px;display:flex;gap:12px;flex-wrap:wrap;
-  }
-  .stat{
-    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.08));
-    padding:12px 14px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);
-    min-width:110px;text-align:center;
-    box-shadow: inset -6px -6px 14px rgba(255,255,255,0.02), 8px 10px 24px rgba(0,0,0,0.45);
-  }
-  .stat strong{display:block;font-size:1.05rem;color:var(--accent-lime)}
-  .stat small{display:block;color:var(--muted);margin-top:6px;font-size:0.8rem}
+        .stat-label {
+            font-size: 12px;
+            color: #aaa;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
 
-  /* side card */
-  .side-card{
-    border-radius:16px;padding:18px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.08));
-    border:1px solid rgba(255,255,255,0.03);
-    box-shadow: 6px 8px 18px rgba(0,0,0,0.4);
-  }
-  .side-card h3{margin:0 0 8px 0;color:var(--accent-lime)}
-  .side-card p{color:var(--muted);font-size:0.9rem}
+        /* Form Section */
+        .form-section {
+            margin-top: 30px;
+        }
 
-  /* main panel with filters and table (glass + neumorphic rows) */
-  .main-panel{
-    border-radius:20px;padding:18px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.06));
-    border:1px solid rgba(255,255,255,0.03);
-    box-shadow: 6px 8px 18px rgba(0,0,0,0.4);
-  }
+        .form-group {
+            margin-bottom: 20px;
+        }
 
-  .controls{
-    display:flex;gap:16px;align-items:end;flex-wrap:wrap;margin-bottom:16px;
-  }
-  .controls .control{
-    min-width:160px;
-  }
-  label{display:block;color:var(--muted);font-size:0.85rem;margin-bottom:6px}
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #ccc;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
 
-  input[type="text"], select{
-    width:100%;padding:10px 12px;border-radius:12px;border:1px solid rgba(255,255,255,0.04);
-    background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.12));
-    color:var(--text);outline:none;font-size:0.95rem;
-    box-shadow: inset -6px -6px 12px rgba(255,255,255,0.02), 8px 10px 22px rgba(0,0,0,0.45);
-    backdrop-filter: blur(6px);
-  }
-  input[type="text"]:focus, select:focus{box-shadow:0 0 12px var(--accent-lime)}
+        .form-inputs {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
 
-    input[type="number"] {
-    width:100%;padding:10px 12px;border-radius:12px;border:1px solid rgba(255,255,255,0.04);
-    background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.12));
-    color:var(--text);outline:none;font-size:0.95rem;
-    box-shadow: inset -6px -6px 12px rgba(255,255,255,0.02), 8px 10px 22px rgba(0,0,0,0.45);
-    backdrop-filter: blur(6px);
-  }
+        @media (max-width: 768px) {
+            .form-inputs {
+                grid-template-columns: 1fr;
+            }
+        }
 
-  /* table style as card rows (neumorphic) */
-  table {
-    width:100%;
-    border-collapse:separate;
-    border-spacing:0 12px;
-  }
-  thead th{color:var(--accent-lime);font-weight:700;padding:12px 14px;text-align:left;font-size:0.95rem}
-  tbody tr{
-    background: linear-gradient(180deg, rgba(255,255,255,0.015), rgba(0,0,0,0.08));
-    border-radius:12px;
-    box-shadow: 6px 8px 18px rgba(0,0,0,0.4), inset -6px -6px 12px rgba(255,255,255,0.02);
-    transform-origin:center;
-    transition: transform .18s ease, box-shadow .18s ease;
-  }
-  tbody tr:hover{transform: translateY(-6px); box-shadow: 6px 8px 18px rgba(0,0,0,0.4)}
-  tbody td{
-    padding:14px 16px;border-bottom:none;border-top:none;color:var(--text);
-    vertical-align:middle;font-size:0.95rem;
-  }
+        input[type="text"],
+        input[type="number"] {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(200, 150, 255, 0.3);
+            border-radius: 10px;
+            color: #fff;
+            font-size: 14px;
+        }
 
-  .stars {
-    display:inline-flex;gap:6px;align-items:center;font-size:0.95rem;
-  }
+        input[type="text"]::placeholder,
+        input[type="number"]::placeholder {
+            color: #888;
+        }
 
-  /* small badges */
-  .badge{
-    display:inline-block;padding:6px 10px;border-radius:999px;background:linear-gradient(180deg,var(--accent-soft), rgba(255,255,255,0.01));
-    color:var(--text);font-weight:700;border:1px solid rgba(255,255,255,0.03);font-size:0.85rem;
-    box-shadow: inset -4px -4px 8px rgba(255,255,255,0.02);
-  }
+        input[type="text"]:focus,
+        input[type="number"]:focus {
+            outline: none;
+            border-color: #b8ff00;
+            background: rgba(0, 0, 0, 0.5);
+        }
 
-  /* footer */
-  footer.page-foot{
-    text-align:center;color:var(--muted);font-size:0.9rem;padding:18px;border-radius:12px;background:transparent;
-  }
+        /* Rating Buttons */
+        .rating-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
 
-  /* responsive */
-  @media (max-width:980px){
-    .hero{grid-template-columns:1fr}
-    .page{padding:12px}
-  }
+        .rating-btn {
+            padding: 10px 15px;
+            background: rgba(184, 255, 0, 0.2);
+            border: 2px solid rgba(184, 255, 0, 0.3);
+            border-radius: 10px;
+            color: #b8ff00;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            min-width: 50px;
+            text-align: center;
+        }
 
-  @media (max-width:560px){
-    .controls{flex-direction:column;align-items:stretch}
-    .header-actions{flex-wrap:wrap}
-    .logo-circle{width:48px;height:48px}
-  }
-  
-  body {
-  background: var(--bg-deep);
-}
+        .rating-btn:hover {
+            background: rgba(184, 255, 0, 0.3);
+            border-color: #b8ff00;
+        }
 
-.hero-card,
-.side-card,
-.main-panel,
-header.main-header {
-  box-shadow: none !important;
-  background: rgba(255,255,255,0.03) !important;
-}
+        .rating-btn.active {
+            background: #b8ff00;
+            color: #2a1a3a;
+            border-color: #b8ff00;
+            box-shadow: 0 0 20px rgba(184, 255, 0, 0.5);
+        }
 
-  /* 🔧 Corrige fundo e elimina faixas escuras */
-body {
-  background-color: var(--bg-deep) !important;
-  background-image: none !important;
-}
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
 
-/* Remove o degradê escuro das linhas da tabela */
-tbody tr {
-  background: rgba(255, 255, 255, 0.03) !important;
-  box-shadow: none !important;
-}
+        button {
+            flex: 1;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
 
-/* Clareia cartões para manter contraste */
-.hero-card,
-.side-card,
-.main-panel,
-header.main-header {
-  background: rgba(255, 255, 255, 0.05) !important;
-  border: 1px solid rgba(255, 255, 255, 0.08) !important;
-  box-shadow: none !important;
-}
+        .btn-add {
+            background: #b8ff00;
+            color: #2a1a3a;
+        }
 
-  /* Mantém as estrelas normais amarelas */
-.star-rating span {
-    font-size: 30px;
-    cursor: pointer;
-    color: #ffce00; /* Coração amarelo (1-5) */
-    text-shadow: 0 0 3px rgba(0,0,0,0.4); /* deixa do mesmo tamanho visual */
-    opacity: 0.3; /* Corações não ativas semi-transparentes */
-}
+        .btn-add:hover {
+            background: #d4ff33;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(184, 255, 0, 0.3);
+        }
 
-/* Estrela ativa no modo normal (1–5) */
-.star-rating span.active {
-    color: #ffce00; /* Coração ativo amarelo */
-    text-shadow: 0 0 8px #ffce00, 0 0 12px #ffce00; /* Brilho amarelo */
-    opacity: 1 !important; /* Garante opacidade total no coração ativo */
-}
+        .btn-clear {
+            background: rgba(200, 150, 255, 0.2);
+            color: #b8ff00;
+            border: 1px solid rgba(200, 150, 255, 0.3);
+        }
 
+        .btn-clear:hover {
+            background: rgba(200, 150, 255, 0.3);
+        }
 
-/* SUPERSTAR: todas azuis + estrela azul */
-.star-rating.superstar-mode span {
-    color: #3aa0ff !important; /* Coração azul (6) */
-    text-shadow: 0 0 3px rgba(0,0,0,0.4); /* Remove o brilho geral */
-    opacity: 1; /* Corações visíveis */
-}
-.star-rating.superstar-mode span.active {
-    color: #3aa0ff !important; /* Coração ativo azul */
-    text-shadow: 0 0 8px #3aa0ff, 0 0 12px #3aa0ff; /* Aplica brilho azul no coração ativo */
-    opacity: 1 !important; /* Garante opacidade total no coração ativo */
-}
+        .btn-delete {
+            background: rgba(255, 100, 100, 0.3);
+            color: #ff6464;
+            border: 1px solid rgba(255, 100, 100, 0.5);
+            padding: 8px 12px;
+            font-size: 12px;
+        }
 
-/* MEGASTAR: todas rosas */
-.star-rating.megastar-mode span {
-    color: #ff4fd8 !important; /* Coração rosa (7) */
-    text-shadow: 0 0 3px rgba(0,0,0,0.4); /* Remove o brilho geral */
-    opacity: 1; /* Corações visíveis */
-}
-.star-rating.megastar-mode span.active {
-    color: #ff4fd8 !important; /* Coração ativo rosa */
-    text-shadow: 0 0 8px #ff4fd8, 0 0 12px #ff4fd8; /* Aplica brilho rosa no coração ativo */
-    opacity: 1 !important; /* Garante opacidade total no coração ativo */
-}
-</style>
+        .btn-delete:hover {
+            background: rgba(255, 100, 100, 0.5);
+        }
+
+        /* Sidebar */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .sidebar-card {
+            background: rgba(60, 30, 80, 0.4);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(200, 150, 255, 0.2);
+            border-radius: 20px;
+            padding: 20px;
+        }
+
+        .sidebar-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #b8ff00;
+            margin-bottom: 15px;
+        }
+
+        .sidebar-text {
+            font-size: 13px;
+            line-height: 1.6;
+            color: #aaa;
+        }
+
+        .storage-badge {
+            display: inline-block;
+            background: rgba(184, 255, 0, 0.2);
+            color: #b8ff00;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-top: 10px;
+            border: 1px solid rgba(184, 255, 0, 0.3);
+        }
+
+        /* Table Section */
+        .table-section {
+            margin-top: 30px;
+        }
+
+        .filter-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .filter-section {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .filter-section select,
+        .filter-section input {
+            padding: 10px 15px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(200, 150, 255, 0.3);
+            border-radius: 10px;
+            color: #fff;
+            font-size: 14px;
+        }
+
+        .filter-section select:focus,
+        .filter-section input:focus {
+            outline: none;
+            border-color: #b8ff00;
+        }
+
+        /* Table */
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        thead {
+            background: rgba(184, 255, 0, 0.1);
+            border-bottom: 2px solid rgba(184, 255, 0, 0.3);
+        }
+
+        th {
+            padding: 15px;
+            text-align: left;
+            font-size: 12px;
+            font-weight: 600;
+            color: #b8ff00;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid rgba(200, 150, 255, 0.1);
+            font-size: 14px;
+        }
+
+        tbody tr:hover {
+            background: rgba(184, 255, 0, 0.05);
+        }
+
+        .stars {
+            color: #ffd700;
+            font-size: 16px;
+        }
+
+        .superstar-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: rgba(255, 215, 0, 0.2);
+            color: #ffd700;
+            padding: 5px 10px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .megastar-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: rgba(255, 100, 255, 0.2);
+            color: #ff64ff;
+            padding: 5px 10px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            border: 1px solid rgba(255, 100, 255, 0.3);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: #888;
+        }
+
+        .empty-state-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        /* Theme Colors */
+        body.theme-purple {
+            background: linear-gradient(135deg, #2a1a3a 0%, #3d2557 100%);
+        }
+
+        body.theme-blue {
+            background: linear-gradient(135deg, #1a2a3a 0%, #253d57 100%);
+        }
+
+        body.theme-red {
+            background: linear-gradient(135deg, #3a1a1a 0%, #5d2525 100%);
+        }
+
+        body.theme-yellow {
+            background: linear-gradient(135deg, #3a3a1a 0%, #5d5d25 100%);
+        }
+
+        body.theme-golden {
+            background: linear-gradient(135deg, #3a2a1a 0%, #5d4425 100%);
+        }
+
+        body.theme-code {
+            background: linear-gradient(135deg, #0f1419 0%, #1a2332 100%);
+        }
+
+        /* Message */
+        .message {
+            padding: 15px 20px;
+            background: rgba(184, 255, 0, 0.15);
+            border-left: 4px solid #b8ff00;
+            border-radius: 8px;
+            color: #b8ff00;
+            margin-top: 15px;
+            font-size: 14px;
+            display: none;
+        }
+
+        .message.show {
+            display: block;
+        }
+    </style>
 </head>
-<body>
-  <div class="page">
-
-    <!-- Header -->
-    <header class="main-header" role="banner">
-      <div class="brand">
-        <div class="logo-circle">🎵</div>
-        <div class="title-area">
-          <h1>🎵 Placar Just Dance do Lele 🎵</h1>
-          <p>Registra suas melhores pontuações — atualizado automaticamente</p>
-        </div>
-        <div style="margin-top:8px;">
-  <label for="themeSelect" style="color:var(--muted);font-size:0.85rem;">Tema do site:</label>
-  <select id="themeSelect" class="pill" style="width:auto;padding:8px 12px;margin-left:6px;">
-    <option value="verde">🟢 Verde</option>
-    <option value="roxo">🟣 Roxo</option>
-    <option value="azul">🔵 Azul</option>
-    <option value="vermelho">🔴 Vermelho</option>
-    <option value="amarelo">🟡 Amarelo</option>
-    <option value="azulFuturista">🪙 Golden Pulse</option>
-    <option value="code">📗 Code</option>
-  </select>
-          <button class="mirellys" onclick="window.location.href='mirellys.html';">Mirelly</button>
-</div>
-      </div>
-    </header>
-
-    <!-- Hero -->
-    <section class="hero" aria-label="Destaque">
-      <div class="hero-card" aria-hidden="false">
-        <div class="hero-text">
-          <h2>Placar & Destaques</h2>
-          <p>Lista completa de músicas, versões e suas pontuações. Use os filtros para encontrar músicas por nome ou por quantidade de estrelas.</p>
-
-          <div class="stat-block">
-            <div class="stat">
-              <strong id="totalSongs">—</strong>
-              <small>Total de músicas</small>
+<body class="theme-green">
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-title">
+                <span>🎵</span>
+                <div>
+                    <div>Placar Just Dance do Lele</div>
+                    <div style="font-size: 14px; color: #aaa; font-weight: normal; margin-top: 5px;">Adicione e gerencie suas melhores pontuações</div>
+                </div>
+                <span>🎵</span>
             </div>
-            <div class="stat">
-              <strong id="avgScore">—</strong>
-              <small>Melhor Pontuação</small>
+            <div class="theme-selector">
+                <label for="themeSelect">Tema:</label>
+                <select id="themeSelect">
+                    <option value="green">🟢 Verde</option>
+                    <option value="purple">🟣 Roxo</option>
+                    <option value="blue">🔵 Azul</option>
+                    <option value="red">🔴 Vermelho</option>
+                    <option value="yellow">🟡 Amarelo</option>
+                    <option value="golden">🪙 Golden Pulse</option>
+                    <option value="code">📗 Code</option>
+                </select>
             </div>
-            <div class="stat">
-              <strong id="topStar">—</strong>
-              <small>Melhor estrela</small>
+        </div>
+
+        <!-- Main Grid -->
+        <div class="main-grid">
+            <!-- Left Column -->
+            <div>
+                <!-- Stats Card -->
+                <div class="card">
+                    <div class="card-title">🎯 Placar & Destaques</div>
+                    <p style="color: #aaa; font-size: 14px; margin-bottom: 20px;">Adicione suas músicas e pontuações. Use os filtros para encontrar músicas por nome ou por quantidade de estrelas.</p>
+                    <div class="stats">
+                        <div class="stat-item">
+                            <div class="stat-value" id="totalMusics">0</div>
+                            <div class="stat-label">Total de músicas</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="bestScore">—</div>
+                            <div class="stat-label">Melhor Pontuação</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="bestRating">—</div>
+                            <div class="stat-label">Melhor nível</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Form Card -->
+                <div class="card" style="margin-top: 30px;">
+                    <div class="card-title">➕ Adicionar Nova Pontuação</div>
+                    
+                    <div class="form-inputs">
+                        <div>
+                            <label>Música</label>
+                            <input type="text" id="musicName" placeholder="Ex: Galway Girl">
+                        </div>
+                        <div>
+                            <label>Versão</label>
+                            <input type="text" id="version" placeholder="Ex: Just Dance 2024">
+                        </div>
+                        <div>
+                            <label>Pontuação</label>
+                            <input type="number" id="score" placeholder="Ex: 9500">
+                        </div>
+                        <div>
+                            <label>Jogo</label>
+                            <input type="text" id="game" placeholder="Ex: PS5">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Nível de Classificação</label>
+                        <div class="rating-buttons">
+                            <button class="rating-btn" data-rating="1">1</button>
+                            <button class="rating-btn" data-rating="2">2</button>
+                            <button class="rating-btn" data-rating="3">3</button>
+                            <button class="rating-btn" data-rating="4">4</button>
+                            <button class="rating-btn" data-rating="5">5</button>
+                            <button class="rating-btn" data-rating="superstar">Superstar</button>
+                            <button class="rating-btn" data-rating="megastar">Megastar</button>
+                        </div>
+                        <div id="selectedRating" style="color: #b8ff00; font-size: 14px; margin-top: 10px;">Selecione um nível</div>
+                    </div>
+
+                    <div class="action-buttons">
+                        <button class="btn-add" id="addBtn">Adicionar Pontuação</button>
+                        <button class="btn-clear" id="clearBtn">Limpar Formulário</button>
+                    </div>
+
+                    <div class="message" id="message"></div>
+                </div>
+
+                <!-- Table Section -->
+                <div class="card" style="margin-top: 30px;">
+                    <div class="card-title">🎵 Placar</div>
+                    
+                    <div class="filter-section">
+                        <div>
+                            <label style="display: block; margin-bottom: 8px; font-size: 12px; color: #aaa;">Filtro por ⭐ mínimas</label>
+                            <select id="filterRating">
+                                <option value="all">Todas</option>
+                                <option value="1">1⭐+</option>
+                                <option value="2">2⭐+</option>
+                                <option value="3">3⭐+</option>
+                                <option value="4">4⭐+</option>
+                                <option value="5">5⭐+</option>
+                                <option value="superstar">Superstar+</option>
+                                <option value="megastar">Megastar</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label style="display: block; margin-bottom: 8px; font-size: 12px; color: #aaa;">Buscar música</label>
+                            <input type="text" id="searchMusic" placeholder="Galway girl, Uptown funk...">
+                        </div>
+                    </div>
+
+                    <div class="table-wrapper">
+                        <table id="scoresTable">
+                            <thead>
+                                <tr>
+                                    <th>Música</th>
+                                    <th>Versão</th>
+                                    <th>Pontuação</th>
+                                    <th>Estrelas</th>
+                                    <th>Jogo</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tableBody">
+                                <tr>
+                                    <td colspan="6" class="empty-state">
+                                        <div class="empty-state-icon">🎵</div>
+                                        <div>Nenhuma pontuação adicionada ainda</div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div style="margin-top: 15px; padding: 15px; background: rgba(0, 0, 0, 0.2); border-radius: 10px; font-size: 13px; color: #aaa;">
+                        💾 Seus dados são salvos localmente no navegador 👍 Fello com carinho
+                    </div>
+                </div>
             </div>
-          </div>
+
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <div class="sidebar-card">
+                    <div class="sidebar-title">Como usar</div>
+                    <div class="sidebar-text">
+                        Preencha o formulário abaixo para adicionar uma nova música. Use os filtros para encontrar músicas por nome ou por quantidade de estrelas.
+                    </div>
+                    <div class="storage-badge">Armazenamento: Navegador local</div>
+                </div>
+            </div>
         </div>
-      </div>
-
-      <aside class="side-card" aria-label="Informações rápidas">
-        <h3>Como usar</h3>
-        <p>Escolha o número mínimo de estrelas e/ou digite parte do nome da música. A tabela abaixo será atualizada automaticamente.</p>
-        <div style="margin-top:14px">
-          <div class="badge">Sincronização: planilha pública</div>
-        </div>
-      </aside>
-    </section>
-
-<div class="score-panel" style="
-    position: relative;
-    margin-bottom: 25px;
-    padding: 20px;
-    background: var(--panel-bg);
-    border-radius: 18px;
-    box-shadow: 0 0 18px rgba(0,0,0,0.25);
-">
-
-    <h2 style="color: var(--accent-purple); margin-bottom: 15px;">Adicionar música rápido</h2>
-
-    <div class="controls" style="display:flex; flex-wrap:wrap; gap:20px; align-items:center;">
-
-        <div class="control">
-            <label>Música</label>
-            <input id="fastMusic" type="text" placeholder="Nome da música" class="input">
-        </div>
-
-        <div class="control">
-            <label>Versão</label>
-            <input id="fastVersion" type="text" placeholder="Classic, Alt, Extreme..." class="input">
-        </div>
-
-        <div class="control">
-            <label>Pontuação</label>
-            <input id="fastScore" type="number" placeholder="Ex: 12845" class="input">
-        </div>
-
-        <div class="control">
-            <label>Estrelas</label>
-            <div class="star-rating" id="addEstrelas">
-  <span data-value="1">★</span>
-  <span data-value="2">★</span>
-  <span data-value="3">★</span>
-  <span data-value="4">★</span>
-  <span data-value="5">★</span>
-  <span class="superstar" data-value="6">★</span>
-  <span class="megastar" data-value="7">★</span>
-         </div>
-        </div>
-
-        <div class="control">
-            <label>Jogo</label>
-            <input id="fastGame" type="text" placeholder="JD 2019, 2020, 2023...">
-        </div>
-
-        <button id="fastAddBtn" class="pill"
-            style="height:45px;background:var(--accent-purple);color:#181818">
-            Adicionar
-        </button>
-
     </div>
-</div>
-    
-    <!-- Main panel: filtros + tabela -->
-    <main class="main-panel" role="main" aria-labelledby="tabela-title">
-      <h2 id="tabela-title" style="margin:0 0 12px 0;color:var(--muted);font-size:1.05rem">Placar</h2>
 
-      <div class="controls" role="region" aria-label="Controles de filtro">
-        <div class="control">
-          <label for="filtroEstrelas">Filtro por estrelas mínimas</label>
-          <select id="filtroEstrelas" aria-controls="tabela">
-            <option value="0">Todas</option>
-            <option value="1">1+</option>
-            <option value="2">2+</option>
-            <option value="3">3+</option>
-            <option value="4">4+</option>
-            <option value="5">5</option>
-          </select>
-        </div>
+    <script>
+        // Data Management
+        let scores = JSON.parse(localStorage.getItem('justDanceScores')) || [];
+        let selectedRating = null;
 
-        <div class="control" style="flex:1">
-          <label for="buscaMusica">Buscar música</label>
-          <input id="buscaMusica" type="text" placeholder="Galway girl, Uptown funk..." aria-label="Buscar música" />
-        </div>
+        // Theme Management
+        const themeSelect = document.getElementById('themeSelect');
+        const themeMap = {
+            green: 'theme-green',
+            purple: 'theme-purple',
+            blue: 'theme-blue',
+            red: 'theme-red',
+            yellow: 'theme-yellow',
+            golden: 'theme-golden',
+            code: 'theme-code'
+        };
 
-        <div style="min-width:140px">
-          <label>&nbsp;</label>
-          <button id="refreshBtn" class="pill" style="width:100%;background:linear-gradient(90deg,var(--accent-lime),var(--accent-lime)); color:#1a1a1a">Atualizar</button>
-        </div>
-      </div>
+        // Load theme from localStorage
+        const savedTheme = localStorage.getItem('justDanceTheme') || 'green';
+        themeSelect.value = savedTheme;
+        document.body.className = themeMap[savedTheme];
 
-      <div style="overflow:auto">
-        <table id="tabela" aria-live="polite" role="table">
-          <thead>
-            <tr>
-              <th scope="col">Música</th>
-              <th scope="col">Versão</th>
-              <th scope="col">Pontuação</th>
-              <th scope="col">Estrelas</th>
-              <th scope="col">Jogo</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-      </div>
+        themeSelect.addEventListener('change', (e) => {
+            const theme = e.target.value;
+            document.body.className = themeMap[theme];
+            localStorage.setItem('justDanceTheme', theme);
+        });
 
-    </main>
-
-    <footer class="page-foot">
-      Atualiza automaticamente com base na planilha do Lele 💃 · Feito com carinho
-    </footer>
-
-  </div>
-
-<script>
-// ==============================
-// BANCO LOCAL
-// ==============================
-
-function carregarBanco() {
-    const salvo = localStorage.getItem("placarJD");
-    return salvo ? JSON.parse(salvo) : [];
-}
-
-function salvarBanco(data) {
-    localStorage.setItem("placarJD", JSON.stringify(data));
-}
-
-let banco = carregarBanco();
-
-// ==============================
-// ADICIONAR MUSICA
-// ==============================
-
-function adicionarMusica(musica, versao, pontuacao, estrelas, jogo) {
-    banco.push({ musica, versao, pontuacao, estrelas, jogo });
-    salvarBanco(banco);
-    atualizarTabela();
-    atualizarStats();
-}
-
-// ==============================
-// TABELA
-// ==============================
-
-function atualizarTabela() {
-    const tbody = document.querySelector("#tabela tbody");
-    tbody.innerHTML = "";
-
-    const filtroEstrelas = Number(document.querySelector("#filtroEstrelas").value);
-    const busca = document.querySelector("#buscaMusica").value.toLowerCase();
-
-    banco
-      .filter(item =>
-        item.musica.toLowerCase().includes(busca) &&
-        Number(item.estrelas) >= filtroEstrelas
-      )
-      .forEach(d => {
-        const tr = document.createElement("tr");
-
-        tr.innerHTML = `
-          <td>${d.musica}</td>
-          <td>${d.versao}</td>
-          <td>${d.pontuacao}</td>
-          <td>${d.estrelas}</td>
-          <td>${d.jogo}</td>
-        `;
-
-        tbody.appendChild(tr);
-      });
-}
-
-// ==============================
-// ESTATÍSTICAS
-// ==============================
-
-function atualizarStats() {
-    const total = banco.length;
-    const melhor = banco.length
-        ? Math.max(...banco.map(x => Number(x.pontuacao) || 0))
-        : "—";
-
-    const melhorEstrela = banco.length
-        ? Math.max(...banco.map(x => Number(x.estrelas)))
-        : "—";
-
-    document.querySelector("#totalSongs").textContent = total;
-    document.querySelector("#avgScore").textContent = melhor;
-    document.querySelector("#topStar").textContent = melhorEstrela;
-}
-
-// ==============================
-// EVENTOS
-// ==============================
-
-document.querySelector("#filtroEstrelas").onchange = atualizarTabela;
-document.querySelector("#buscaMusica").oninput = atualizarTabela;
-
-document.querySelector("#refreshBtn").onclick = () => {
-    atualizarTabela();
-    atualizarStats();
-};
-
-// ==============================
-// INICIALIZAR
-// ==============================
-document.addEventListener("DOMContentLoaded", () => {
-    criarFormulario();
-    atualizarTabela();
-    atualizarStats();
-});
-;
-
-  function configurarEstrelas() {
-  const container = document.querySelector("#addEstrelas");
-  let valor = 1; // padrão
-
-  function atualizar() {
-    container.querySelectorAll("span").forEach(star => {
-      const v = Number(star.dataset.value);
-      star.classList.toggle("active", v <= valor);
-    });
-  }
-
-  container.querySelectorAll("span").forEach(star => {
-    star.addEventListener("click", () => {
-      valor = Number(star.dataset.value);
-      atualizar();
-    });
-  });
-
-  // retorna sempre o valor atual
-  return () => valor;
-}
-
-let pegarEstrelas = configurarEstrelas();
-
-function configurarEstrelas() {
-  const container = document.querySelector("#addEstrelas");
-  let valor = 1;
-
-  function atualizar() {
-    container.querySelectorAll("span").forEach(star => {
-      const v = Number(star.dataset.value);
-      star.classList.toggle("active", v === valor);
-    });
-  }
-
-  container.querySelectorAll("span").forEach(star => {
-    star.addEventListener("click", () => {
-      valor = Number(star.dataset.value);
-      atualizar();
-    });
-  });
-
-  return () => valor;
-}
-
-let pegarEstrelas = configurarEstrelas();
-
-  function configurarEstrelas() {
-    const ratings = document.querySelectorAll(".star-rating")
-
-    ratings.forEach(container => {
-        const estrelas = container.querySelectorAll("span");
-
-        estrelas.forEach(star => {
-            star.addEventListener("click", () => {
-                const value = parseInt(star.getAttribute("data-value"));
-
-                estrelas.forEach(s => {
-  s.classList.remove("active");
-});
-
-                for (let i = 0; i < value; i++) {
-                    estrelas[i].classList.add("active");
-                }
-
-                container.setAttribute("data-rating", value);
+        // Rating buttons
+        document.querySelectorAll('.rating-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.rating-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                selectedRating = btn.dataset.rating;
+                updateRatingMessage();
             });
         });
-    });
-}
 
-configurarEstrelas();
-  
-// 🎨 Temas disponíveis — cada um com cor principal e fundo escuro próprio
-const temas = {
-  verde: {
-    cor: "#BFFF3B",
-    fundo1: "#381929",
-    fundo2: "#2C1120",
-    fundo3: "#1A0A12"
-  },
-  roxo: {
-  cor: "#C39BFF",         // roxo pastel
-  fundo1: "#183033",      // verde-azulado escuro
-  fundo2: "#122326",
-  fundo3: "#0C1719"
-},
-  azul: {
-  cor: "#47B8FF",         // azul ciano
-  fundo1: "#361D14",      // laranja queimado
-  fundo2: "#2A150E",
-  fundo3: "#1A0D09"
-},
-  vermelho: {
-  cor: "#FF6F91",         // rosa avermelhado
-  fundo1: "#0E193B",      // azul escuro
-  fundo2: "#0A132A",
-  fundo3: "#050A1A"
-},
-  amarelo: {
-    cor: "#F2D546",
-    fundo1: "#2F103B",
-    fundo2: "#1E0A26",
-    fundo3: "#100514"
-  },
-    azulFuturista: {
-    cor: "#E5C029",
-    fundo1: "#271639",
-    fundo2: "#71221F",
-    fundo3: "#5E1F71"
-  },
-  code: {
-    cor: "#3BFF38",
-    fundo1: "#131313",
-    fundo2: "#030303",
-    fundo3: "#011301"
-  }
-};
+        function updateRatingMessage() {
+            const ratingDisplay = document.getElementById('selectedRating');
+            if (!selectedRating) {
+                ratingDisplay.textContent = 'Selecione um nível';
+                ratingDisplay.style.color = '#888';
+            } else {
+                const ratingText = selectedRating === 'superstar' ? '⭐ Superstar' : 
+                                  selectedRating === 'megastar' ? '⭐ Megastar' : 
+                                  '⭐'.repeat(selectedRating);
+                ratingDisplay.textContent = ratingText;
+                ratingDisplay.style.color = '#b8ff00';
+            }
+        }
 
-function aplicarTema(nome) {
-  const tema = temas[nome] || temas.verde;
-  document.documentElement.style.setProperty("--accent-lime", tema.cor);
-  document.documentElement.style.setProperty("--bg-deep", tema.fundo1);
-  document.documentElement.style.setProperty("--bg-mid", tema.fundo2);
-  document.documentElement.style.setProperty("--bg-low", tema.fundo3);
+        // Add score
+        document.getElementById('addBtn').addEventListener('click', () => {
+            const musicName = document.getElementById('musicName').value.trim();
+            const version = document.getElementById('version').value.trim();
+            const score = document.getElementById('score').value.trim();
+            const game = document.getElementById('game').value.trim();
 
-  document.body.style.background = `var(--bg-deep)`;
-
-  const select = document.getElementById("themeSelect");
-  select.style.color = tema.cor;
-  select.style.borderColor = tema.cor;
-}
-
-document.getElementById("themeSelect").addEventListener("change", (e) => {
-  aplicarTema(e.target.value);
-});
-
-aplicarTema("verde");
-</script>
-  <script>
-document.querySelector("#btnAddScore").onclick = () => {
-    const p = document.querySelector("#addPontuacao").value.trim();
-    const e = document.querySelector("#addEstrelas").value.trim();
-
-    if (!p) return alert("Coloque sua pontuação!");
-
-    // Adiciona sem mexer no resto
-    adicionarMusica("—", "—", p, e, "—");
-
-    document.querySelector("#addPontuacao").value = "";
-};
-</script>
-  <script>
-document.querySelector("#fastAddBtn").onclick = () => {
-    const m = document.querySelector("#fastMusic").value.trim();
-    const v = document.querySelector("#fastVersion").value.trim();
-    const p = document.querySelector("#fastScore").value.trim();
-    const e = document.querySelector("#addEstrelas").dataset.rating || 0; // Lê o valor do data-rating
-    const g = document.querySelector("#fastGame").value.trim();
-
-    if (!m || !p) {
-        alert("Você precisa colocar pelo menos o nome da música e a pontuação.");
-        return;
-    }
-
-    adicionarMusica(m, v, p, e, g); // usa o seu sistema atual
-
-    // limpa os campos
-    document.querySelector("#fastMusic").value = "";
-    document.querySelector("#fastVersion").value = "";
-    document.querySelector("#fastScore").value = "";
-    document.querySelector("#fastGame").value = "";
-};
-configurarEstrelas();
-</script>
-<script>
-// Função que ativa/desativa as estrelas
-function configurarEstrelas() {
-    const rating = document.getElementById("addEstrelas");
-    if (!rating) return;
-
-    const estrelas = rating.querySelectorAll("span");
-
-    estrelas.forEach(star => {
-        star.addEventListener("click", () => {
-            const value = parseInt(star.getAttribute("data-value"));
-
-            // remove ativo de todas
-           estrelas.forEach(s => {
-  s.classList.remove("active");
-});
-
-            // ativa todas até a clicada
-            for (let i = 0; i < estrelas.length; i++) {
-                if (parseInt(estrelas[i].dataset.value) <= value) {
-                    estrelas[i].classList.add("active");
-                }
+            if (!musicName || !version || !score || !game || !selectedRating) {
+                showMessage('Por favor, preencha todos os campos e selecione um nível', 'error');
+                return;
             }
 
-            // salva no próprio container (para usar ao adicionar música)
-            rating.dataset.rating = value;
+            const newScore = {
+                id: Date.now(),
+                musicName,
+                version,
+                score: parseInt(score),
+                game,
+                rating: selectedRating
+            };
+
+            scores.push(newScore);
+            localStorage.setItem('justDanceScores', JSON.stringify(scores));
+            
+            clearForm();
+            updateStats();
+            renderTable();
+            showMessage('Pontuação adicionada com sucesso! 🎉');
         });
-    });
-}
 
-// Ativa tudo quando a página carrega
-document.addEventListener("DOMContentLoaded", () => {
-    configurarEstrelas();
-});
-  const rating = document.getElementById("addEstrelas");
-const stars = rating.querySelectorAll("span");
+        // Clear form
+        document.getElementById('clearBtn').addEventListener('click', clearForm);
 
-stars.forEach(star => {
-  star.addEventListener("click", () => {
-    const val = Number(star.dataset.value);
+        function clearForm() {
+            document.getElementById('musicName').value = '';
+            document.getElementById('version').value = '';
+            document.getElementById('score').value = '';
+            document.getElementById('game').value = '';
+            selectedRating = null;
+            document.querySelectorAll('.rating-btn').forEach(b => b.classList.remove('active'));
+            updateRatingMessage();
+        }
 
-    // remove as marcas anteriores
-    rating.classList.remove("superstar-mode", "megastar-mode");
-    stars.forEach(s => s.classList.remove("active"));
+        // Delete score
+        function deleteScore(id) {
+            scores = scores.filter(s => s.id !== id);
+            localStorage.setItem('justDanceScores', JSON.stringify(scores));
+            updateStats();
+            renderTable();
+            showMessage('Pontuação deletada com sucesso');
+        }
 
-    // ativa até a selecionada
-    stars.forEach(s => {
-      if (Number(s.dataset.value) <= val) {
-        s.classList.add("active");
-      }
-    });
+        // Update stats
+        function updateStats() {
+            document.getElementById('totalMusics').textContent = scores.length;
 
-    // se clicou superstar (6)
-    if (val === 6) {
-      rating.classList.add("superstar-mode");
-    }
+            if (scores.length === 0) {
+                document.getElementById('bestScore').textContent = '—';
+                document.getElementById('bestRating').textContent = '—';
+                return;
+            }
 
-    // se clicou megastar (7)
-    if (val === 7) {
-      rating.classList.add("megastar-mode");
-    }
-  });
-});
-</script>
-  <script>
-document.addEventListener("DOMContentLoaded", () => {
-    const rating = document.getElementById("addEstrelas");
-    const stars = rating.querySelectorAll("span");
+            const bestScoreObj = scores.reduce((max, s) => s.score > max.score ? s : max);
+            document.getElementById('bestScore').textContent = bestScoreObj.score;
 
-    stars.forEach(star => {
-        star.addEventListener("click", () => {
-            const val = Number(star.dataset.value);
+            const ratingOrder = { megastar: 7, superstar: 6, 5: 5, 4: 4, 3: 3, 2: 2, 1: 1 };
+            const bestRatingObj = scores.reduce((max, s) => 
+                (ratingOrder[s.rating] || 0) > (ratingOrder[max.rating] || 0) ? s : max
+            );
 
-            // reseta classes do modo superstar/megastar
-            rating.classList.remove("superstar-mode", "megastar-mode");
+            const ratingText = bestRatingObj.rating === 'superstar' ? '⭐ Superstar' : 
+                              bestRatingObj.rating === 'megastar' ? '⭐ Megastar' : 
+                              '⭐'.repeat(bestRatingObj.rating);
+            document.getElementById('bestRating').textContent = ratingText;
+        }
 
-            // reseta active
-            stars.forEach(s => s.classList.remove("active"));
+        // Render table
+        function renderTable() {
+            const filterRating = document.getElementById('filterRating').value;
+            const searchMusic = document.getElementById('searchMusic').value.toLowerCase();
 
-            // ativa todas as estrelas até a clicada
-            stars.forEach(s => {
-                if (Number(s.dataset.value) <= val) {
-                    s.classList.add("active");
-                }
+            let filtered = scores.filter(s => {
+                const matchesSearch = s.musicName.toLowerCase().includes(searchMusic);
+                
+                if (filterRating === 'all') return matchesSearch;
+                if (filterRating === 'megastar') return matchesSearch && s.rating === 'megastar';
+                if (filterRating === 'superstar') return matchesSearch && (s.rating === 'superstar' || s.rating === 'megastar');
+                
+                const ratingOrder = { megastar: 7, superstar: 6, 5: 5, 4: 4, 3: 3, 2: 2, 1: 1 };
+                return matchesSearch && (ratingOrder[s.rating] || 0) >= parseInt(filterRating);
             });
 
-            // ativa o modo certo
-            if (val === 6) {
-                rating.classList.add("superstar-mode");
-            } else if (val === 7) {
-                rating.classList.add("megastar-mode");
-            }
-        });
-    });
-});
-</script>
-  <script>
-    document.querySelectorAll(".star-rating").forEach(starBlock => {
-    const stars = starBlock.querySelectorAll("span");
+            const tbody = document.getElementById('tableBody');
 
-    stars.forEach(star => {
-        star.addEventListener("click", () => {
-            const value = Number(star.dataset.value);
-
-            // Remove modos especiais
-            starBlock.classList.remove("superstar-mode", "megastar-mode");
-
-            // Limpa todas as estrelas
-            stars.forEach(s => s.classList.remove("active"));
-
-            // Modo normal: 1–5
-            if (value <= 5) {
-                stars.forEach(s => {
-                    if (Number(s.dataset.value) <= value) {
-                        s.classList.add("active");
-                    }
-                });
-                starBlock.dataset.rating = value; // Adiciona esta linha
+            if (filtered.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="6" class="empty-state">
+                            <div class="empty-state-icon">🎵</div>
+                            <div>Nenhuma pontuação encontrada</div>
+                        </td>
+                    </tr>
+                `;
                 return;
             }
 
-            // SUPERSTAR (6)
-            if (value === 6) {
-                starBlock.classList.add("superstar-mode");
-                star.classList.add("active"); // <-- ESSENCIAL
-                starBlock.dataset.rating = value; // Adiciona esta linha
-                return;
-            }
+            tbody.innerHTML = filtered.map(s => {
+                const ratingDisplay = s.rating === 'superstar' ? '<span class="superstar-badge">⭐ Superstar</span>' :
+                                     s.rating === 'megastar' ? '<span class="megastar-badge">⭐ Megastar</span>' :
+                                     `<span class="stars">${'⭐'.repeat(s.rating)}</span>`;
 
-            // MEGASTAR (7)
-            if (value === 7) {
-                starBlock.classList.add("megastar-mode");
-                star.classList.add("active"); // <-- ESSENCIAL
-                starBlock.dataset.rating = value; // Adiciona esta linha
-                return;
-            }
-        });
-    });
-});
-</script>
+                return `
+                    <tr>
+                        <td>${s.musicName}</td>
+                        <td>${s.version}</td>
+                        <td>${s.score}</td>
+                        <td>${ratingDisplay}</td>
+                        <td>${s.game}</td>
+                        <td>
+                            <button class="btn-delete" onclick="deleteScore(${s.id})">Deletar</button>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        // Filter and search
+        document.getElementById('filterRating').addEventListener('change', renderTable);
+        document.getElementById('searchMusic').addEventListener('input', renderTable);
+
+        // Show message
+        function showMessage(text, type = 'success') {
+            const message = document.getElementById('message');
+            message.textContent = text;
+            message.className = 'message show';
+            setTimeout(() => message.classList.remove('show'), 3000);
+        }
+
+        // Initialize
+        updateStats();
+        renderTable();
+    </script>
 </body>
 </html>
