@@ -586,5 +586,18 @@ criarFormulario();
 atualizarTabela();
 atualizarStats();
 </script>
+  <script>
+document.querySelector("#btnAddScore").onclick = () => {
+    const p = document.querySelector("#addPontuacao").value.trim();
+    const e = document.querySelector("#addEstrelas").value.trim();
+
+    if (!p) return alert("Coloque sua pontuação!");
+
+    // Adiciona sem mexer no resto
+    adicionarMusica("—", "—", p, e, "—");
+
+    document.querySelector("#addPontuacao").value = "";
+};
+</script>
 </body>
 </html>
