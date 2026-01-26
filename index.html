@@ -334,13 +334,13 @@
                     const maxValue = max.rating === 'megastar' ? 6 : max.rating === 'superstar' ? 5.5 : parseInt(max.rating);
                     return ratingValue > maxValue ? s : max;
                 });
-                document.getElementById('bestRating').textContent = getRatingDisplay(bestRatingObj.rating);
+                document.getElementById('bestRating').innerHTML = getRatingDisplay(bestRatingObj.rating);
                 
                 const totalStars = scores.reduce((sum, s) => sum + (s.rating === 'megastar' ? 6 : s.rating === 'superstar' ? 5 : parseInt(s.rating)), 0);
                 document.getElementById('totalStars').textContent = totalStars;
             } else {
                 document.getElementById('bestScore').textContent = '—';
-                document.getElementById('bestRating').textContent = '—';
+                document.getElementById('bestRating').innerHTML = '—';
                 document.getElementById('totalStars').textContent = '0';
             }
         }
