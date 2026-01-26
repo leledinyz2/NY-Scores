@@ -354,10 +354,10 @@
         // Obter exibição de classificação
         function getRatingDisplay(rating) {
             if (rating === 'superstar') {
-                return '<span class="stars-container">' + createStarSVG('blue') + createStarSVG('blue') + createStarSVG('blue') + createStarSVG('blue') + createStarSVG('blue') + '<span style="margin-left: 8px; font-size: 0.9em;">(Super)</span></span>';
+                return '<span class="stars-container">' + createStarSVG('blue') + createStarSVG('blue') + createStarSVG('blue') + createStarSVG('blue') + createStarSVG('blue') + '</span>';
             }
             if (rating === 'megastar') {
-                return '<span class="stars-container">' + createStarSVG('magenta') + createStarSVG('magenta') + createStarSVG('magenta') + createStarSVG('magenta') + createStarSVG('magenta') + '<span style="margin-left: 8px; font-size: 0.9em;">(Mega)</span></span>';
+                return '<span class="stars-container">' + createStarSVG('magenta') + createStarSVG('magenta') + createStarSVG('magenta') + createStarSVG('magenta') + createStarSVG('magenta') + '</span>';
             }
             const numStars = parseInt(rating);
             let stars = '';
@@ -373,7 +373,7 @@
                 document.querySelectorAll('.rating-btn').forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
                 selectedRating = btn.dataset.rating;
-                document.getElementById('selectedRating').textContent = getRatingDisplay(selectedRating);
+                document.getElementById('selectedRating').innerHTML = getRatingDisplay(selectedRating);
                 document.getElementById('selectedRating').style.color = 'var(--accent-color)';
             });
         });
