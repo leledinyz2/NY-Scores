@@ -1,0 +1,56 @@
+/* ============================================
+   TEMA COTTON - Rosa e Laranja
+   ============================================ */
+
+:root[data-theme="neon"] {
+    /* Cores principais - Rosa e Laranja */
+    --primary-color: #FF6B9D;
+    --primary-gradient: linear-gradient(135deg, #FF6B9D 0%, #FFA07A 100%);
+    --primary-glow: rgba(255, 107, 157, 0.5);
+    
+    /* Cores secundárias */
+    --accent-color: #FFB347;
+    --secondary-color: #FF69B4;
+    
+    /* Gradientes de texto */
+    --text-gradient: linear-gradient(90deg, #FF6B9D, #FFB347, #FF69B4);
+    
+    /* Cores de fundo */
+    --bg-color: linear-gradient(135deg, #FFF5F7 0%, #FFF0E6 50%, #FFF5F7 100%);
+    --header-bg: rgba(255, 245, 247, 0.8);
+    --card-bg: #FFFBF9;
+    --input-bg: #FFF8F5;
+    --input-focus-bg: rgba(255, 245, 247, 0.9);
+    --hero-bg: linear-gradient(135deg, #FFF5F7 0%, #FFF0E6 100%);
+    --hero-overlay: linear-gradient(135deg, rgba(255, 107, 157, 0.08) 0%, rgba(255, 179, 71, 0.08) 100%);
+    
+    /* Cores de texto */
+    --text-color: #4A3F3A;
+    --secondary-text: #8B7A72;
+    --placeholder-color: #B8A89E;
+    
+    /* Cores de borda */
+    --border-color: #E8D4CC;
+    
+    /* Cores de componentes */
+    --thead-bg: rgba(255, 107, 157, 0.08);
+    --row-hover-bg: rgba(255, 107, 157, 0.04);
+    --card-shadow: 0 10px 30px rgba(255, 107, 157, 0.1);
+    
+    /* Cores dos ícones */
+    --color-1: linear-gradient(135deg, #FF6B9D 0%, #FF69B4 100%);
+    --color-2: linear-gradient(135deg, #FFB347 0%, #FFA07A 100%);
+    --color-3: linear-gradient(135deg, #FF69B4 0%, #FF6B9D 100%);
+    --color-4: linear-gradient(135deg, #FFA07A 0%, #FFB347 100%);
+}
+
+body[data-theme="neon"] {
+    background: var(--bg-color);
+    color: var(--text-color);
+}
+
+/* Efeito extra de glow para tema cotton */
+:root[data-theme="neon"] .stat-card,
+:root[data-theme="neon"] .card {
+    box-shadow: 0 0 20px rgba(255, 107, 157, 0.15);
+}

@@ -4,466 +4,81 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NY Scores - Just Dance</title>
+    
+    <!-- Estilos base -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Temas (o tema ativo será carregado dinamicamente) -->
+    <link rel="stylesheet" href="theme-cyberpunk.css" id="theme-link">
+    
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap');
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #0a0e27 0%, #1a0a2e 50%, #0f0520 100%);
-            min-height: 100vh;
-            color: #FFFFFF;
-        }
-
-        h1, h2, h3, h4, h5, h6 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 700;
-        }
-
-        .container {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 0 1rem;
-        }
-
-        /* Header */
-        .header {
-            border-bottom: 1px solid #2a2a4e;
-            backdrop-filter: blur(10px);
-            background: rgba(10, 14, 39, 0.5);
-            padding: 1.5rem 0;
-            margin-bottom: 2rem;
-        }
-
-        .header-content {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .header-icon {
-            width: 2.5rem;
-            height: 2.5rem;
-            background: linear-gradient(135deg, #FF1493 0%, #FF006E 100%);
-            border-radius: 0.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            box-shadow: 0 0 20px rgba(255, 20, 147, 0.5);
-        }
-
-        .header-title h1 {
-            font-size: 1.875rem;
-            background: linear-gradient(90deg, #FF1493, #00D9FF, #39FF14);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 0.25rem;
-        }
-
-        .header-title p {
-            font-size: 0.875rem;
-            color: #b0b0d0;
-        }
-
-        /* Stats Grid */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-
-        .stat-card {
-            background: #1a1a3e;
-            border: 1px solid #2a2a4e;
-            border-radius: 1rem;
-            padding: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .stat-card:hover {
-            border-color: #FF1493;
-            box-shadow: 0 0 30px rgba(255, 20, 147, 0.3);
-            transform: translateY(-2px);
-        }
-
-        .stat-icon {
-            width: 3rem;
-            height: 3rem;
-            border-radius: 0.75rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            flex-shrink: 0;
-        }
-
-        .stat-icon.icon-1 { background: linear-gradient(135deg, #FF1493 0%, #FF006E 100%); }
-        .stat-icon.icon-2 { background: linear-gradient(135deg, #00D9FF 0%, #00B4D8 100%); }
-        .stat-icon.icon-3 { background: linear-gradient(135deg, #39FF14 0%, #00FF00 100%); }
-        .stat-icon.icon-4 { background: linear-gradient(135deg, #FF6B35 0%, #FF1493 100%); }
-
-        .stat-content p {
-            font-size: 0.875rem;
-            color: #b0b0d0;
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-value {
-            font-size: 1.32rem;
-            font-weight: bold;
-            color: #FFFFFF;
-        }
-
-        /* Main Grid */
-        .main-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        @media (max-width: 1024px) {
-            .main-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Card */
-        .card {
-            background: #1a1a3e;
-            border: 1px solid #2a2a4e;
-            border-radius: 1rem;
-            padding: 2rem;
-            box-shadow: 0 10px 30px rgba(255, 20, 147, 0.1);
-        }
-
-        .card-title {
-            font-size: 1.5rem;
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        .card-title span {
-            background: linear-gradient(90deg, #FF1493, #00D9FF);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        /* Form */
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            font-size: 0.875rem;
-            font-weight: 500;
-            color: #b0b0d0;
-            margin-bottom: 0.5rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .form-inputs {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        @media (max-width: 768px) {
-            .form-inputs {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        input[type="text"],
-        input[type="number"],
-        select {
-            width: 100%;
-            padding: 0.75rem 1rem;
-            background: #0a0e27;
-            border: 1px solid #2a2a4e;
-            border-radius: 0.625rem;
-            color: #FFFFFF;
-            font-size: 0.875rem;
-            font-family: 'Inter', sans-serif;
-            transition: all 0.3s ease;
-        }
-
-        input::placeholder {
-            color: #4a4a6a;
-        }
-
-        input:focus,
-        select:focus {
-            outline: none;
-            border-color: #FF1493;
-            box-shadow: 0 0 10px rgba(255, 20, 147, 0.3);
-            background: rgba(10, 14, 39, 0.8);
-        }
-
-        /* Rating Buttons */
-        .rating-buttons {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .rating-btn {
-            padding: 0.625rem 1rem;
-            background: #0a0e27;
-            border: 2px solid #2a2a4e;
-            border-radius: 0.625rem;
-            color: #b0b0d0;
-            cursor: pointer;
-            font-size: 0.875rem;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .rating-btn:hover {
-            border-color: #FF1493;
-            color: #FF1493;
-        }
-
-        .rating-btn.active {
-            background: linear-gradient(135deg, #FF1493 0%, #FF006E 100%);
-            border-color: #FF1493;
-            color: #FFFFFF;
-            box-shadow: 0 0 20px rgba(255, 20, 147, 0.5);
-            transform: scale(1.05);
-        }
-
-        .selected-rating {
-            font-size: 0.875rem;
-            color: #39FF14;
-            margin-top: 0.5rem;
-        }
-
-        /* Buttons */
-        .button-group {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1.5rem;
-        }
-
-        button {
-            flex: 1;
-            padding: 0.75rem 1.25rem;
-            border: none;
-            border-radius: 0.625rem;
-            font-size: 0.875rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .btn-add {
-            background: linear-gradient(135deg, #FF1493 0%, #FF006E 100%);
-            color: #FFFFFF;
-        }
-
-        .btn-add:hover {
-            box-shadow: 0 10px 30px rgba(255, 20, 147, 0.3);
-            transform: translateY(-2px);
-        }
-
-        .btn-clear {
-            background: transparent;
-            border: 1px solid #2a2a4e;
-            color: #b0b0d0;
-        }
-
-        .btn-clear:hover {
-            background: #0a0e27;
-            border-color: #FF1493;
-            color: #FF1493;
-        }
-
-        .btn-delete {
-            background: transparent;
-            border: 1px solid #FF1493;
-            color: #FF1493;
-            padding: 0.5rem 0.75rem;
-            font-size: 0.75rem;
-            flex: none;
-            width: auto;
-        }
-
-        .btn-delete:hover {
-            background: rgba(255, 20, 147, 0.2);
-        }
-
-        /* Sidebar */
-        .sidebar-card {
-            background: #1a1a3e;
-            border: 1px solid #2a2a4e;
-            border-radius: 1rem;
-            padding: 1.5rem;
-            box-shadow: 0 10px 30px rgba(0, 217, 255, 0.1);
-        }
-
-        .sidebar-title {
-            font-size: 1.125rem;
-            font-weight: bold;
-            color: #00D9FF;
-            margin-bottom: 1rem;
-        }
-
-        .sidebar-text {
-            font-size: 0.875rem;
-            line-height: 1.6;
-            color: #b0b0d0;
-            margin-bottom: 1rem;
-        }
-
-        .storage-badge {
+        /* Ícones de Estrelas */
+        .star-icon {
             display: inline-block;
-            background: #0a0e27;
-            border: 1px solid #2a2a4e;
-            color: #39FF14;
-            padding: 0.75rem;
+            width: 1.2em;
+            height: 1.2em;
+            margin: 0 2px;
+            vertical-align: middle;
+        }
+
+        .star-icon.star-yellow {
+            color: #FFD700;
+        }
+
+        .star-icon.star-blue {
+            color: #00D9FF;
+        }
+
+        .star-icon.star-magenta {
+            color: #FF1493;
+        }
+
+        .stars-container {
+            display: inline-flex;
+            gap: 2px;
+            align-items: center;
+        }
+
+        /* Estilos adicionais para o seletor de temas */
+        .theme-selector {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .theme-selector label {
+            font-size: 0.875rem;
+            color: var(--secondary-text);
+            margin-right: 0.5rem;
+        }
+
+        .theme-btn {
+            padding: 0.5rem 1rem;
+            background: var(--card-bg);
+            border: 2px solid var(--border-color);
             border-radius: 0.5rem;
-            font-size: 0.75rem;
-            margin-top: 1rem;
-        }
-
-        /* Table */
-        .table-section {
-            margin-top: 2rem;
-        }
-
-        .filter-section {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        @media (max-width: 768px) {
-            .filter-section {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .table-wrapper {
-            overflow-x: auto;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 1.25rem;
-        }
-
-        thead {
-            background: rgba(255, 20, 147, 0.1);
-            border-bottom: 2px solid #2a2a4e;
-        }
-
-        th {
-            padding: 1rem;
-            text-align: left;
+            color: var(--text-color);
+            cursor: pointer;
             font-size: 0.75rem;
             font-weight: 600;
-            color: #00D9FF;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
         }
 
-        td {
-            padding: 1rem;
-            border-bottom: 1px solid #2a2a4e;
-            font-size: 0.875rem;
+        .theme-btn:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
         }
 
-        tbody tr:hover {
-            background: rgba(255, 20, 147, 0.05);
-        }
-
-        .empty-state {
-            text-align: center;
-            padding: 2rem 1rem;
-            color: #b0b0d0;
-        }
-
-        .empty-state-icon {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-        }
-
-        /* Footer */
-        .footer-note {
-            margin-top: 1rem;
-            padding: 1rem;
-            background: #0a0e27;
-            border: 1px solid #2a2a4e;
-            border-radius: 0.625rem;
-            font-size: 0.8125rem;
-            color: #b0b0d0;
-        }
-
-        /* Hero Section */
-        .hero {
-            position: relative;
-            height: 16rem;
-            background: linear-gradient(135deg, #0a0e27 0%, #1a0a2e 100%);
-            border-radius: 1rem;
-            border: 1px solid #2a2a4e;
-            margin-bottom: 2rem;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            padding: 2rem;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, rgba(255, 20, 147, 0.1) 0%, rgba(0, 217, 255, 0.1) 100%);
-            pointer-events: none;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero h2 {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-            color: #FFFFFF;
-        }
-
-        .hero p {
-            color: #b0b0d0;
-            font-size: 0.95rem;
+        .theme-btn.active {
+            background: var(--primary-gradient);
+            border-color: var(--primary-color);
+            color: white;
+            box-shadow: 0 0 20px var(--primary-glow);
         }
     </style>
 </head>
-<body>
+<body data-theme="cyberpunk">
     <div class="container">
         <!-- Header -->
         <header class="header">
@@ -473,6 +88,15 @@
                     <h1>NY Scores</h1>
                     <p>Gerenciador de Pontuações Just Dance</p>
                 </div>
+            </div>
+            
+            <!-- Seletor de Temas -->
+            <div class="theme-selector">
+                <label for="theme-select">🎨 Tema:</label>
+                <button class="theme-btn active" data-theme="cyberpunk">Cyberpunk</button>
+                <button class="theme-btn" data-theme="light">Light</button>
+                <button class="theme-btn" data-theme="dark">Coffee</button>
+                <button class="theme-btn" data-theme="neon">Cotton</button>
             </div>
         </header>
 
@@ -569,10 +193,11 @@
                 <p class="sidebar-text">
                     Preencha o formulário com os dados da sua performance. Selecione o nível de classificação e clique em "Adicionar Pontuação".
                 </p>
-                <div style="font-size: 0.875rem; color: #39FF14; line-height: 1.8;">
+                <div style="font-size: 0.875rem; color: var(--accent-color); line-height: 1.8;">
                     <p>✓ Dados salvos localmente</p>
                     <p>✓ Sem limite de pontuações</p>
                     <p>✓ Filtros avançados</p>
+                    <p>✓ 4 temas: Cyberpunk, Light, Coffee, Cotton</p>
                 </div>
                 <div class="storage-badge">
                     💾 Armazenamento: Navegador Local
@@ -636,17 +261,67 @@
     </div>
 
     <script>
-        // Data Management
+        // ============================================
+        // SISTEMA DE TEMAS
+        // ============================================
+        
+        const themeButtons = document.querySelectorAll('.theme-btn');
+        const themeLink = document.getElementById('theme-link');
+        const htmlElement = document.documentElement;
+        
+        // Temas disponíveis
+        const themes = {
+            cyberpunk: 'theme-cyberpunk.css',
+            light: 'theme-light.css',
+            dark: 'theme-dark.css',
+            neon: 'theme-neon.css'
+        };
+        
+        // Carregar tema salvo ou usar padrão
+        function loadTheme() {
+            const savedTheme = localStorage.getItem('selectedTheme') || 'cyberpunk';
+            setTheme(savedTheme);
+        }
+        
+        // Definir tema
+        function setTheme(themeName) {
+            if (themes[themeName]) {
+                themeLink.href = themes[themeName];
+                htmlElement.setAttribute('data-theme', themeName);
+                localStorage.setItem('selectedTheme', themeName);
+                
+                // Atualizar botões
+                themeButtons.forEach(btn => {
+                    btn.classList.remove('active');
+                    if (btn.getAttribute('data-theme') === themeName) {
+                        btn.classList.add('active');
+                    }
+                });
+            }
+        }
+        
+        // Event listeners para botões de tema
+        themeButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const themeName = btn.getAttribute('data-theme');
+                setTheme(themeName);
+            });
+        });
+        
+        // ============================================
+        // GERENCIAMENTO DE DADOS
+        // ============================================
+        
         let scores = JSON.parse(localStorage.getItem('justDanceScores')) || [];
         let selectedRating = null;
 
-        // Load scores on page load
+        // Carregar scores ao iniciar
         function loadScores() {
             updateStats();
             renderTable();
         }
 
-        // Update statistics
+        // Atualizar estatísticas
         function updateStats() {
             document.getElementById('totalMusics').textContent = scores.length;
             
@@ -670,25 +345,40 @@
             }
         }
 
-        // Get rating display
-        function getRatingDisplay(rating) {
-            if (rating === 'superstar') return '⭐⭐⭐⭐⭐ (Super)';
-            if (rating === 'megastar') return '🌟🌟🌟🌟🌟 (Mega)';
-            return '⭐'.repeat(parseInt(rating));
+        // SVG Star Icon
+        function createStarSVG(color) {
+            const svg = '<svg class="star-icon star-' + color + '" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><polygon points="12 2 15.09 10.26 23.77 10.36 17.13 16.01 19.09 24.29 12 18.54 4.91 24.29 6.87 16.01 0.23 10.36 8.91 10.26"/></svg>';
+            return svg;
         }
 
-        // Rating buttons
+        // Obter exibição de classificação
+        function getRatingDisplay(rating) {
+            if (rating === 'superstar') {
+                return '<span class="stars-container">' + createStarSVG('blue') + createStarSVG('blue') + createStarSVG('blue') + createStarSVG('blue') + createStarSVG('blue') + '<span style="margin-left: 8px; font-size: 0.9em;">(Super)</span></span>';
+            }
+            if (rating === 'megastar') {
+                return '<span class="stars-container">' + createStarSVG('magenta') + createStarSVG('magenta') + createStarSVG('magenta') + createStarSVG('magenta') + createStarSVG('magenta') + '<span style="margin-left: 8px; font-size: 0.9em;">(Mega)</span></span>';
+            }
+            const numStars = parseInt(rating);
+            let stars = '';
+            for (let i = 0; i < numStars; i++) {
+                stars += createStarSVG('yellow');
+            }
+            return '<span class="stars-container">' + stars + '</span>';
+        }
+
+        // Botões de classificação
         document.querySelectorAll('.rating-btn').forEach(btn => {
             btn.addEventListener('click', () => {
                 document.querySelectorAll('.rating-btn').forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
                 selectedRating = btn.dataset.rating;
                 document.getElementById('selectedRating').textContent = getRatingDisplay(selectedRating);
-                document.getElementById('selectedRating').style.color = '#39FF14';
+                document.getElementById('selectedRating').style.color = 'var(--accent-color)';
             });
         });
 
-        // Add score
+        // Adicionar pontuação
         document.getElementById('addBtn').addEventListener('click', () => {
             const musicName = document.getElementById('musicName').value.trim();
             const version = document.getElementById('version').value.trim();
@@ -715,7 +405,7 @@
             renderTable();
         });
 
-        // Clear form
+        // Limpar formulário
         function clearForm() {
             document.getElementById('musicName').value = '';
             document.getElementById('version').value = '';
@@ -724,12 +414,12 @@
             document.querySelectorAll('.rating-btn').forEach(b => b.classList.remove('active'));
             selectedRating = null;
             document.getElementById('selectedRating').textContent = 'Selecione um nível';
-            document.getElementById('selectedRating').style.color = '#b0b0d0';
+            document.getElementById('selectedRating').style.color = 'var(--secondary-text)';
         }
 
         document.getElementById('clearBtn').addEventListener('click', clearForm);
 
-        // Delete score
+        // Deletar pontuação
         function deleteScore(id) {
             scores = scores.filter(s => s.id !== id);
             localStorage.setItem('justDanceScores', JSON.stringify(scores));
@@ -737,7 +427,7 @@
             renderTable();
         }
 
-        // Render table
+        // Renderizar tabela
         function renderTable() {
             const filterRating = document.getElementById('filterRating').value;
             const searchMusic = document.getElementById('searchMusic').value.toLowerCase();
@@ -770,8 +460,8 @@
                 <tr>
                     <td>${s.musicName}</td>
                     <td>${s.version}</td>
-                    <td style="color: #39FF14; font-weight: bold;">${s.score}</td>
-                    <td style="color: #FF1493;">${getRatingDisplay(s.rating)}</td>
+                    <td style="color: var(--accent-color); font-weight: bold;">${s.score}</td>
+                    <td>${getRatingDisplay(s.rating)}</td>
                     <td>${s.game}</td>
                     <td>
                         <button class="btn-delete" onclick="deleteScore('${s.id}')">Deletar</button>
@@ -780,11 +470,12 @@
             `).join('');
         }
 
-        // Filter and search
+        // Filtro e busca
         document.getElementById('filterRating').addEventListener('change', renderTable);
         document.getElementById('searchMusic').addEventListener('input', renderTable);
 
-        // Initialize
+        // Inicializar
+        loadTheme();
         loadScores();
     </script>
 </body>

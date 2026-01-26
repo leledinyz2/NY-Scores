@@ -1,0 +1,50 @@
+/* ============================================
+   TEMA CYBERPUNK - Futurista e Neon
+   ============================================ */
+
+:root[data-theme="cyberpunk"] {
+    /* Cores principais */
+    --primary-color: #FF1493;
+    --primary-gradient: linear-gradient(135deg, #FF1493 0%, #FF006E 100%);
+    --primary-glow: rgba(255, 20, 147, 0.5);
+    
+    /* Cores secundárias */
+    --accent-color: #39FF14;
+    --secondary-color: #00D9FF;
+    
+    /* Gradientes de texto */
+    --text-gradient: linear-gradient(90deg, #FF1493, #00D9FF, #39FF14);
+    
+    /* Cores de fundo */
+    --bg-color: linear-gradient(135deg, #0a0e27 0%, #1a0a2e 50%, #0f0520 100%);
+    --header-bg: rgba(10, 14, 39, 0.5);
+    --card-bg: #1a1a3e;
+    --input-bg: #0a0e27;
+    --input-focus-bg: rgba(10, 14, 39, 0.8);
+    --hero-bg: linear-gradient(135deg, #0a0e27 0%, #1a0a2e 100%);
+    --hero-overlay: linear-gradient(135deg, rgba(255, 20, 147, 0.1) 0%, rgba(0, 217, 255, 0.1) 100%);
+    
+    /* Cores de texto */
+    --text-color: #FFFFFF;
+    --secondary-text: #b0b0d0;
+    --placeholder-color: #4a4a6a;
+    
+    /* Cores de borda */
+    --border-color: #2a2a4e;
+    
+    /* Cores de componentes */
+    --thead-bg: rgba(255, 20, 147, 0.1);
+    --row-hover-bg: rgba(255, 20, 147, 0.05);
+    --card-shadow: 0 10px 30px rgba(255, 20, 147, 0.1);
+    
+    /* Cores dos ícones */
+    --color-1: linear-gradient(135deg, #FF1493 0%, #FF006E 100%);
+    --color-2: linear-gradient(135deg, #00D9FF 0%, #00B4D8 100%);
+    --color-3: linear-gradient(135deg, #39FF14 0%, #00FF00 100%);
+    --color-4: linear-gradient(135deg, #FF6B35 0%, #FF1493 100%);
+}
+
+body[data-theme="cyberpunk"] {
+    background: var(--bg-color);
+    color: var(--text-color);
+}

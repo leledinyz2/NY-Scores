@@ -1,0 +1,50 @@
+/* ============================================
+   TEMA COFFEE - Soft Autumn
+   ============================================ */
+
+:root[data-theme="dark"] {
+    /* Cores principais - Soft Autumn */
+    --primary-color: #C9956D;
+    --primary-gradient: linear-gradient(135deg, #C9956D 0%, #A67C52 100%);
+    --primary-glow: rgba(201, 149, 109, 0.3);
+    
+    /* Cores secundárias */
+    --accent-color: #D4A574;
+    --secondary-color: #8B7355;
+    
+    /* Gradientes de texto */
+    --text-gradient: linear-gradient(90deg, #C9956D, #D4A574, #A67C52);
+    
+    /* Cores de fundo */
+    --bg-color: linear-gradient(135deg, #2B2520 0%, #3D3530 50%, #2B2520 100%);
+    --header-bg: rgba(43, 37, 32, 0.6);
+    --card-bg: #3D3530;
+    --input-bg: #2B2520;
+    --input-focus-bg: rgba(43, 37, 32, 0.8);
+    --hero-bg: linear-gradient(135deg, #2B2520 0%, #3D3530 100%);
+    --hero-overlay: linear-gradient(135deg, rgba(201, 149, 109, 0.1) 0%, rgba(212, 165, 116, 0.1) 100%);
+    
+    /* Cores de texto */
+    --text-color: #F5F1ED;
+    --secondary-text: #D4C4B8;
+    --placeholder-color: #9B8B7E;
+    
+    /* Cores de borda */
+    --border-color: #5A4F47;
+    
+    /* Cores de componentes */
+    --thead-bg: rgba(201, 149, 109, 0.1);
+    --row-hover-bg: rgba(201, 149, 109, 0.05);
+    --card-shadow: 0 10px 30px rgba(201, 149, 109, 0.1);
+    
+    /* Cores dos ícones */
+    --color-1: linear-gradient(135deg, #C9956D 0%, #A67C52 100%);
+    --color-2: linear-gradient(135deg, #D4A574 0%, #C9956D 100%);
+    --color-3: linear-gradient(135deg, #8B7355 0%, #6B5A47 100%);
+    --color-4: linear-gradient(135deg, #B8956D 0%, #9B7E5C 100%);
+}
+
+body[data-theme="dark"] {
+    background: var(--bg-color);
+    color: var(--text-color);
+}
