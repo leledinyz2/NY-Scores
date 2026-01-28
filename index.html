@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" id="htmlElement">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -84,7 +84,7 @@
         <header class="header">
             <div class="header-content">
                 <div class="header-icon">🎵</div>
-                <div class="header-title">
+                <div class="header-title logo-text">
                     <h1>NY Scores</h1>
                     <p>Gerenciador de Pontuações Just Dance</p>
                 </div>
@@ -113,28 +113,28 @@
             <div class="stat-card">
                 <div class="stat-icon icon-1">🎵</div>
                 <div class="stat-content">
-                    <p>Total de Músicas</p>
+                    <p id="totalMusicsLabel">Total de Músicas</p>
                     <div class="stat-value" id="totalMusics">0</div>
                 </div>
             </div>
             <div class="stat-card">
                 <div class="stat-icon icon-2">🏆</div>
                 <div class="stat-content">
-                    <p>Melhor Pontuação</p>
+                    <p id="bestScoreLabel">Melhor Pontuação</p>
                     <div class="stat-value" id="bestScore">—</div>
                 </div>
             </div>
             <div class="stat-card">
                 <div class="stat-icon icon-3">⭐</div>
                 <div class="stat-content">
-                    <p>Melhor Nível</p>
+                    <p id="bestRatingLabel">Melhor Nível</p>
                     <div class="stat-value" id="bestRating">—</div>
                 </div>
             </div>
             <div class="stat-card">
                 <div class="stat-icon icon-4">🔥</div>
                 <div class="stat-content">
-                    <p>Total de Estrelas</p>
+                    <p id="totalStarsLabel">Total de Estrelas</p>
                     <div class="stat-value" id="totalStars">0</div>
                 </div>
             </div>
@@ -262,6 +262,162 @@
 
     <script>
         // ============================================
+        // SISTEMA DE IDIOMAS
+        // ============================================
+        
+        const translations = {
+            pt: {
+                title: 'NY Scores',
+                subtitle: 'Gerenciador de Pontuações Just Dance',
+                welcome: 'Bem-vindo ao seu Dashboard',
+                description: 'Acompanhe suas melhores performances e celebre cada vitória',
+                totalMusics: 'Total de Músicas',
+                bestScore: 'Melhor Pontuação',
+                bestLevel: 'Melhor Nível',
+                totalStars: 'Total de Estrelas',
+                addScore: 'Adicionar Pontuação',
+                music: 'Música',
+                version: 'Versão',
+                score: 'Pontuação',
+                game: 'Jogo',
+                rating: 'Nível de Classificação',
+                selectLevel: 'Selecione um nível',
+                add: 'Adicionar Pontuação',
+                clear: 'Limpar',
+                howToUse: 'Como Usar',
+                howToUseDesc: 'Preencha o formulário com os dados da sua performance. Selecione o nível de classificação e clique em "Adicionar Pontuação".',
+                localData: 'Dados salvos localmente',
+                noLimit: 'Sem limite de pontuações',
+                advancedFilters: 'Filtros avançados',
+                themes: '4 temas: Cyberpunk, Light, Coffee, Cotton',
+                storage: 'Armazenamento: Navegador Local',
+                filter: 'Filtro por',
+                search: 'Buscar música',
+                noScores: 'Nenhuma pontuação adicionada ainda',
+                delete: 'Deletar',
+                actions: 'Ações',
+                stars: 'Estrelas',
+                version_label: 'Ex: Just Dance 2024',
+                music_label: 'Ex: Galway Girl',
+                score_label: 'Ex: 9500',
+                game_label: 'Ex: PS5',
+                theme: 'Tema',
+                language: 'Idioma',
+                footer: 'Seus dados são salvos localmente no navegador 👏 Feito com carinho por Lele',
+                fillRequired: 'Por favor, preencha todos os campos obrigatórios'
+            },
+            en: {
+                title: 'NY Scores',
+                subtitle: 'Just Dance Score Manager',
+                welcome: 'Welcome to your Dashboard',
+                description: 'Track your best performances and celebrate every victory',
+                totalMusics: 'Total Songs',
+                bestScore: 'Best Score',
+                bestLevel: 'Best Level',
+                totalStars: 'Total Stars',
+                addScore: 'Add Score',
+                music: 'Music',
+                version: 'Version',
+                score: 'Score',
+                game: 'Game',
+                rating: 'Rating Level',
+                selectLevel: 'Select a level',
+                add: 'Add Score',
+                clear: 'Clear',
+                howToUse: 'How to Use',
+                howToUseDesc: 'Fill in the form with your performance data. Select the rating level and click "Add Score".',
+                localData: 'Data saved locally',
+                noLimit: 'Unlimited scores',
+                advancedFilters: 'Advanced filters',
+                themes: '4 themes: Cyberpunk, Light, Coffee, Cotton',
+                storage: 'Storage: Local Browser',
+                filter: 'Filter by',
+                search: 'Search music',
+                noScores: 'No scores added yet',
+                delete: 'Delete',
+                actions: 'Actions',
+                stars: 'Stars',
+                version_label: 'Ex: Just Dance 2024',
+                music_label: 'Ex: Galway Girl',
+                score_label: 'Ex: 9500',
+                game_label: 'Ex: PS5',
+                theme: 'Theme',
+                language: 'Language',
+                footer: 'Your data is saved locally in your browser 👏 Made with care by Lele',
+                fillRequired: 'Please fill in all required fields'
+            }
+        };
+        
+        let currentLanguage = 'pt';
+        
+        // Detectar idioma do navegador
+        function detectLanguage() {
+            const browserLang = navigator.language || navigator.userLanguage;
+            if (browserLang.startsWith('pt')) {
+                return 'pt';
+            } else if (browserLang.startsWith('en')) {
+                return 'en';
+            }
+            return 'pt'; // Padrão
+        }
+        
+        // Obter tradução
+        function t(key) {
+            return translations[currentLanguage][key] || translations['pt'][key];
+        }
+        
+        // Carregar idioma salvo ou detectado
+        function loadLanguage() {
+            currentLanguage = localStorage.getItem('selectedLanguage') || detectLanguage();
+            updateLanguage();
+        }
+        
+        // Atualizar todos os textos da página
+        function updateLanguage() {
+            document.documentElement.lang = currentLanguage;
+            localStorage.setItem('selectedLanguage', currentLanguage);
+            
+            // Atualizar textos
+            document.querySelector('.logo-text h1').textContent = t('title');
+            document.querySelector('.logo-text p').textContent = t('subtitle');
+            document.querySelector('.hero h2').textContent = t('welcome');
+            document.querySelector('.hero p').textContent = t('description');
+            document.getElementById('totalMusicsLabel').textContent = t('totalMusics');
+            document.getElementById('bestScoreLabel').textContent = t('bestScore');
+            document.getElementById('bestRatingLabel').textContent = t('bestLevel');
+            document.getElementById('totalStarsLabel').textContent = t('totalStars');
+            document.querySelector('.form-group label').textContent = t('rating');
+            document.getElementById('selectedRating').textContent = t('selectLevel');
+            document.getElementById('addBtn').textContent = t('add');
+            document.getElementById('clearBtn').textContent = t('clear');
+            document.querySelector('.sidebar-title').textContent = t('howToUse');
+            document.querySelector('.sidebar-text').textContent = t('howToUseDesc');
+            document.querySelector('.storage-badge').textContent = t('storage');
+            document.getElementById('filterRating').previousElementSibling.textContent = t('filter');
+            document.getElementById('searchMusic').placeholder = t('search');
+            document.querySelector('.footer-note').textContent = t('footer');
+            
+            // Atualizar labels dos inputs
+            document.querySelectorAll('.form-inputs label')[0].textContent = t('music');
+            document.querySelectorAll('.form-inputs label')[1].textContent = t('version');
+            document.querySelectorAll('.form-inputs label')[2].textContent = t('score');
+            document.querySelectorAll('.form-inputs label')[3].textContent = t('game');
+            
+            document.getElementById('musicName').placeholder = t('music_label');
+            document.getElementById('version').placeholder = t('version_label');
+            document.getElementById('score').placeholder = t('score_label');
+            document.getElementById('game').placeholder = t('game_label');
+            
+            // Atualizar tabela
+            document.querySelectorAll('thead th')[0].textContent = t('music');
+            document.querySelectorAll('thead th')[1].textContent = t('version');
+            document.querySelectorAll('thead th')[2].textContent = t('score');
+            document.querySelectorAll('thead th')[3].textContent = t('stars');
+            document.querySelectorAll('thead th')[4].textContent = t('game');
+            document.querySelectorAll('thead th')[5].textContent = t('actions');
+        }
+        
+        // ============================================
         // SISTEMA DE TEMAS
         // ============================================
         
@@ -386,7 +542,7 @@
             const game = document.getElementById('game').value.trim();
 
             if (!musicName || !score || !selectedRating) {
-                alert('Por favor, preencha todos os campos obrigatórios');
+                alert(t('fillRequired'));
                 return;
             }
 
@@ -449,7 +605,7 @@
                     <tr>
                         <td colspan="6" class="empty-state">
                             <div class="empty-state-icon">🎵</div>
-                            <div>Nenhuma pontuação encontrada</div>
+                            <div>${t('noScores')}</div>
                         </td>
                     </tr>
                 `;
@@ -464,7 +620,7 @@
                     <td>${getRatingDisplay(s.rating)}</td>
                     <td>${s.game}</td>
                     <td>
-                        <button class="btn-delete" onclick="deleteScore('${s.id}')">Deletar</button>
+                        <button class="btn-delete" onclick="deleteScore('${s.id}')">${t('delete')}</button>
                     </td>
                 </tr>
             `).join('');
@@ -475,6 +631,7 @@
         document.getElementById('searchMusic').addEventListener('input', renderTable);
 
         // Inicializar
+        loadLanguage();
         loadTheme();
         loadScores();
     </script>
